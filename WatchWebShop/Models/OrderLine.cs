@@ -8,23 +8,22 @@ namespace WatchWebShop.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [ForeignKey("Order")]
         public int OrderId { get; set; }
 
-        [Required]
-        [ForeignKey("Product")]
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
+
         public int ProductId { get; set; }
 
-        [Required]
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
+
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
 
-        [Required]
         [Display(Name = "Unit Price Netto")]
         public decimal UnitPriceNetto { get; set; }
 
-        [Required]
         public decimal TaxRate { get;}
     }
 }

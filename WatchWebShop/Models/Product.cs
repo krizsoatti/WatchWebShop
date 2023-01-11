@@ -26,12 +26,12 @@ namespace WatchWebShop.Models
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Product Manufacturer")]
+        [Display(Name = "Product ManufacturerID")]
         [ForeignKey("Manufacturer")]
         public int ManufacturerId { get; set; }
 
         [Required]
-        [Display(Name = "Product Category")]
+        [Display(Name = "Product CategoryID")]
         [ForeignKey("Category")]
         public string CategoryId { get; set; }
     }
