@@ -18,12 +18,8 @@ namespace WatchWebShop.Models
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
 
-        [Display(Name = "Quantity")]
         public int Quantity { get; set; }
-
-        [Display(Name = "Unit Price Netto")]
         public double UnitPriceNetto { get; set; }
-
-        public double TaxRate { get;}
+        public double TaxRate { get; set; }
     }
 }
