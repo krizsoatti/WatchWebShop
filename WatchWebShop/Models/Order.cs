@@ -13,7 +13,7 @@ namespace WatchWebShop.Models
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
 
-        public decimal TotalPriceBrutto { get; set; }
+        public double TotalPriceBrutto { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime OrderedOn { get; set; }

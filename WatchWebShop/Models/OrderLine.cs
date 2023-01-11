@@ -22,8 +22,8 @@ namespace WatchWebShop.Models
         public int Quantity { get; set; }
 
         [Display(Name = "Unit Price Netto")]
-        public decimal UnitPriceNetto { get; set; }
+        public double UnitPriceNetto { get; set; }
 
-        public decimal TaxRate { get;}
+        public double TaxRate { get;}
     }
 }

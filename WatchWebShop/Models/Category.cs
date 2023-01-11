@@ -8,6 +8,6 @@ namespace WatchWebShop.Models
         public int Id { get; set; }
         
         public string Name { get; set; }
-        public decimal TaxRate { get; set; }
+        public double TaxRate { get; set; }
     }
 }

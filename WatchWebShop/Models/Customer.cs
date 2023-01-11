@@ -17,9 +17,6 @@ namespace WatchWebShop.Models
         public string ZipCode { get; set; }
         public string City { get; set; }
 
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
     }
