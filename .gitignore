@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WatchWebShop/appsettings.json
+/WatchWebShop/Migrations/20230111105454_DatenBankFirst.cs
+/WatchWebShop/Migrations/20230111111017_DatenBankSecond.cs
+/WatchWebShop/Migrations/20230111113437_DatenBankThird.cs
+/WatchWebShop/Migrations/AppDbContextModelSnapshot.cs
+/WatchWebShop/Migrations/20230116071525_sajatGepFirst.cs
+/WatchWebShop/Migrations/20230116071525_sajatGepFirst.Designer.cs
