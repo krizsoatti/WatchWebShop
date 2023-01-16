@@ -368,3 +368,5 @@ FodyWeavers.xsd
 /WatchWebShop/Migrations/AppDbContextModelSnapshot.cs
 /WatchWebShop/Migrations/20230116071525_sajatGepFirst.cs
 /WatchWebShop/Migrations/20230116071525_sajatGepFirst.Designer.cs
+/WatchWebShop/Migrations/20230116112526_LogoPathAdded.Designer.cs
+/WatchWebShop/Migrations/20230116112526_LogoPathAdded.cs
