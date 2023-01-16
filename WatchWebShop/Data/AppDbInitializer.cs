@@ -30,11 +30,11 @@ namespace WatchWebShop.Data
                 if (!context.Manufacturers.Any())
                 {
                     context.Manufacturers.AddRange(
-                        new Manufacturer { Name = "Casio" },
-                        new Manufacturer { Name = "Certina" },
-                        new Manufacturer { Name = "Citizen" },
-                        new Manufacturer { Name = "Seiko" },
-                        new Manufacturer { Name = "Tissot" }
+                        new Manufacturer { Name = "Casio", LogoPath = "~/Data/ManufacturersLogo/Casio.jpg" },
+                        new Manufacturer { Name = "Certina", LogoPath = "~/Data/ManufacturersLogo/Certina.jpg" },
+                        new Manufacturer { Name = "Citizen", LogoPath = "~/Data/ManufacturersLogo/Citizen.jpg" },
+                        new Manufacturer { Name = "Seiko", LogoPath = "~/Data/ManufacturersLogo/Seiko.png" },
+                        new Manufacturer { Name = "Tissot", LogoPath = "~/Data/ManufacturersLogo/Tissot.jpg" }
                     );
                     context.SaveChanges();
                 }
