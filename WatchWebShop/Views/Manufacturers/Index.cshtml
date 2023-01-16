@@ -4,12 +4,12 @@
     ViewData["Title"] = "List of Manufacturers";
 }
 
-<h2>Manufacturers</h2>
-<br />
+@*<h2 class="align-middle">Our Brands</h2>
+<br />*@
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
-        <table class="table table-striped">
+    <div class="col-md-5 offset-md-3">
+        <table class="table">
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.LogoPath)</th>
@@ -28,9 +28,9 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td class="align-middle">
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a> |
+                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
+                            <a class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete </a>
                         </td>
                     </tr>
                 }
