@@ -19,7 +19,7 @@ namespace WatchWebShop.Controllers
         public async Task<IActionResult> Index()
         {
             var allManufacturers = await _context.Manufacturers.ToListAsync();
-            return View();
+            return View(allManufacturers);
         }
     }
 }

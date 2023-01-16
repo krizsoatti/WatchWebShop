@@ -30,11 +30,11 @@ namespace WatchWebShop.Data
                 if (!context.Manufacturers.Any())
                 {
                     context.Manufacturers.AddRange(
-                        new Manufacturer { Name = "Casio", LogoPath = "~/Data/ManufacturersLogo/Casio.jpg" },
-                        new Manufacturer { Name = "Certina", LogoPath = "~/Data/ManufacturersLogo/Certina.jpg" },
-                        new Manufacturer { Name = "Citizen", LogoPath = "~/Data/ManufacturersLogo/Citizen.jpg" },
-                        new Manufacturer { Name = "Seiko", LogoPath = "~/Data/ManufacturersLogo/Seiko.png" },
-                        new Manufacturer { Name = "Tissot", LogoPath = "~/Data/ManufacturersLogo/Tissot.jpg" }
+                        new Manufacturer { Name = "Casio", LogoPath = "https://i.pinimg.com/736x/0a/c6/6c/0ac66c2f437644e10300b7fc5240ca1a.jpg" },
+                        new Manufacturer { Name = "Certina", LogoPath = "https://www.designtagebuch.de/wp-content/uploads/mediathek//2013/05/certina-logo-700x513.jpg" },
+                        new Manufacturer { Name = "Citizen", LogoPath = "https://1000logos.net/wp-content/uploads/2020/09/Logo-Citizen.jpg" },
+                        new Manufacturer { Name = "Seiko", LogoPath = "https://www.zeitenblick.at/wp-content/uploads/2019/06/Seiko-logo-1600x900-tiny-1024x576.png" },
+                        new Manufacturer { Name = "Tissot", LogoPath = "https://i.pinimg.com/originals/b0/23/46/b02346ae70c528b816475eb088a81906.jpg" }
                     );
                     context.SaveChanges();
                 }

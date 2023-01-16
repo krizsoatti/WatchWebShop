@@ -7,7 +7,11 @@ namespace WatchWebShop.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Manufacturer Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Manufacturer Logo")]
         public string LogoPath { get; set; }
 
         public List<Product> Products { get; set; }
