@@ -8,10 +8,10 @@ namespace WatchWebShop.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Manufacturer Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Manufacturer Logo")]
+        [Display(Name = "Our Brands")]
         public string LogoPath { get; set; }
 
         public List<Product> Products { get; set; }

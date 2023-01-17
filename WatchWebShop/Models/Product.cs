@@ -8,9 +8,14 @@ namespace WatchWebShop.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Product Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Netto Price")]
         public double UnitPriceNetto { get; set; }
         public string ImagePath { get; set; }
+
+        [Display(Name = "Product Description")]
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
