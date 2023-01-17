@@ -16,7 +16,7 @@ namespace WatchWebShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allProducts = await _context.Products.ToListAsync();
+            var allProducts = await _context.Products.Include(n => n.Manufacturer).Include(c => c.Category).ToListAsync();
             return View(allProducts);
         }
     }
