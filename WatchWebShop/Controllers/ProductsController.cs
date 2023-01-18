@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
+using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
@@ -24,6 +25,18 @@ namespace WatchWebShop.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")]Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
