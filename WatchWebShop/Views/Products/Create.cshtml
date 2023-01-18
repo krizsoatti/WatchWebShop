@@ -1,0 +1,68 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Add a new Product";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a new Product</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </form>
+                <div class="form-group text-center">
+                    <img id="ImagePreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control" />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer" class="control-label"></label>
+                    <input asp-for="Manufacturer" class="form-control" />
+                    <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label"></label>
+                    <input asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UnitPriceNetto" class="control-label"></label>
+                    <input asp-for="UnitPriceNetto" class="form-control" />
+                    <span asp-validation-for="UnitPriceNetto" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-success float-right" />
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $("#ImagePath").on("change", function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}

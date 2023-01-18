@@ -19,5 +19,11 @@ namespace WatchWebShop.Controllers
             var allProducts = await _context.Products.Include(n => n.Manufacturer).Include(c => c.Category).ToListAsync();
             return View(allProducts);
         }
+
+        //Get: Products/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

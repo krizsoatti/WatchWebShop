@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWebShop.Models
@@ -13,6 +14,7 @@ namespace WatchWebShop.Models
 
         [Display(Name = "Netto Price")]
         public double UnitPriceNetto { get; set; }
+        
         public string ImagePath { get; set; }
 
         [Display(Name = "Product Description")]
