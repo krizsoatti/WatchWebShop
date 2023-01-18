@@ -4,6 +4,27 @@
     ViewData["Title"] = "List of our Products";
 }
 
+<div class="text-black-50">
+    <h1 style="text-align:center">Welcome to our Store</h1>
+</div>
+<br />
+<br />
+
+<div class="text-black-50">
+    <h4 style="text-align:center">Our Brands</h4>
+</div>
+
+<div class="container" style="justify-content:center">
+    <center>
+        <img src="~/Images/Casio.png" alt="Casio" style="width:15%; padding-right: 10px">
+        <img src="~/Images/Certina.jpg" alt="Certina" style="width:15%; padding-right: 10px">
+        <img src="~/Images/Citizen.jpg" alt="Citizen" style="width:15%; padding-right: 10px">
+        <img src="~/Images/Seiko.png" alt="Seiko" style="width:15%; padding-right: 10px">
+        <img src="~/Images/Tissot.jpg" alt="Tissot" style="width:15%; padding-right: 10px">
+    </center>
+</div>
+<br />
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -48,6 +69,6 @@
     }
 </div>
 
-<div style="position:fixed; right:125px; bottom: 125px;" class="text-white">
+<div style="position:fixed; right:20px; bottom: 125px;" class="text-white">
     <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
 </div>

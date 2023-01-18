@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
+using WatchWebShop.Data.ViewModels;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
@@ -21,17 +24,37 @@ namespace WatchWebShop.Controllers
             return View(allProducts);
         }
 
-        //Get: Products/Create
-        public IActionResult Create()
+        public async Task<NewProductDropdownsVM> GetNewProductDropdownsValues()
         {
+            var response = new NewProductDropdownsVM()
+            {
+                Manufacturers = await _context.Manufacturers.OrderBy(n => n.Name).ToListAsync(),
+                Categories = await _context.Categories.OrderBy(n => n.Name).ToListAsync()
+            };
+            return response;
+        }
+
+        //Get: Products/Create
+        public async Task<IActionResult> Create()
+        {
+            var productDropdownsData = await GetNewProductDropdownsValues();
+
+            ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+            ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")]Product product)
+        public async Task<IActionResult> Create([Bind("Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")] Product product)
         {
             if (!ModelState.IsValid)
             {
+                var productDropdownsData = await GetNewProductDropdownsValues();
+
+                ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+                ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+                
                 return View(product);
             }
             _context.Products.Add(product);
