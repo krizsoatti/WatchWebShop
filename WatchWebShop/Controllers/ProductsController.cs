@@ -67,7 +67,7 @@ namespace WatchWebShop.Controllers
         {
             if (id == null)
             {
-                return View("Empty");
+                return View("NotFound");
             }
 
             var product = await _context.Products
@@ -87,7 +87,7 @@ namespace WatchWebShop.Controllers
         {
             if (id == null)
             {
-                return View("Empty");
+                return View("NotFound");
             }
 
             var product = await _context.Products.FindAsync(id);
@@ -137,7 +137,7 @@ namespace WatchWebShop.Controllers
         {
             if (id == null)
             {
-                return View("Empty");
+                return View("NotFound");
             }
 
             var product = await _context.Products
