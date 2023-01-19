@@ -4,21 +4,22 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
+using WatchWebShop.Services;
 
 namespace WatchWebShop.Controllers
 {
     public class ManufacturersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IManufacturersService _service;
 
-        public ManufacturersController(AppDbContext context)
+        public ManufacturersController(IManufacturersService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allManufacturers = await _context.Manufacturers.ToListAsync();
+            var allManufacturers = await _service.GetAllAsync();
             return View(allManufacturers);
         }
     }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
+using WatchWebShop.Services;
 
 namespace WatchWebShop
 {
@@ -27,6 +28,10 @@ namespace WatchWebShop
 
             //DbContext configuration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+            //Services configuration
+            services.AddScoped<IManufacturersService, ManufacturersService>();
+
 
             services.AddControllersWithViews();
         }
