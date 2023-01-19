@@ -52,5 +52,32 @@ namespace WatchWebShop.Controllers
             await _service.AddAsync(manufacturer);
             return RedirectToAction(nameof(Index));
         }
+
+        //GET: Manufacturers/Edit/1
+        public async Task<IActionResult> Edit(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if(manufacturerDetails == null)
+            {
+                return View("NotFound");
+            }
+            return View(manufacturerDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, LogoPath")] Manufacturer manufacturer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(manufacturer);
+            }
+
+            if(id == manufacturer.Id)
+            {
+                await _service.UpdateAsync(id, manufacturer);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(manufacturer);
+        }
     }
 }
