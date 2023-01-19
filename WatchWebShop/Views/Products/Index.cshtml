@@ -11,7 +11,7 @@
 <br />
 
 <div class="text-black-50">
-    <h4 style="text-align:center">Our Brands</h4>
+    <h4 style="text-align:center">Our contracted partners</h4>
 </div>
 
 <div class="container" style="justify-content:center">
@@ -58,7 +58,7 @@
                     <div class="col-md-12">
                         <div class="card-footer">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Show Details</a>
+                                <a class="btn btn-outline-info float-right" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
                                 <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.UnitPriceNetto.ToString("c"))</a>
                             </p>
                         </div>

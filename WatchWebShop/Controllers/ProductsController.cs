@@ -61,5 +61,26 @@ namespace WatchWebShop.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Products/Details/1
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return View("Empty");
+            }
+
+            var product = await _context.Products
+                .Include(m => m.Manufacturer)
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(product);
+        }
     }
 }

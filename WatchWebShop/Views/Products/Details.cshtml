@@ -1,0 +1,67 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Add a new Product";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <center><h1>@Model.Name</h1></center>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+                <div class="form-group text-center">
+                    <img id="ImagePreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control" readonly />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="ManufacturerId" class="control-label"></label>
+                    <select asp-for="ManufacturerId" class="form-control" asp-items="ViewBag.Manufacturers"></select>
+                    <span asp-validation-for="ManufacturerId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UnitPriceNetto" class="control-label"></label>
+                    <input asp-for="UnitPriceNetto" class="form-control" readonly />
+                    <span asp-validation-for="UnitPriceNetto" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $("#ImagePath").val();
+        })
+    </script>
+}
