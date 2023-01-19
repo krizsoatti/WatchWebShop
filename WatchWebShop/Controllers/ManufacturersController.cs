@@ -22,5 +22,16 @@ namespace WatchWebShop.Controllers
             var allManufacturers = await _service.GetAllAsync();
             return View(allManufacturers);
         }
+
+        //GET: Manufacturers/Details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null)
+            {
+                return View("NotFound");
+            }
+            return View(manufacturerDetails);
+        }
     }
 }
