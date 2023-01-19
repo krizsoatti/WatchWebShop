@@ -10,9 +10,11 @@ namespace WatchWebShop.Models
         public int Id { get; set; }
 
         [Display(Name = "Name")]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         [Display(Name = "Our Brands")]
+        [Required(ErrorMessage = "LogoPath is required")]
         public string LogoPath { get; set; }
 
         public List<Product> Products { get; set; }
