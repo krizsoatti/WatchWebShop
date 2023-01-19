@@ -63,7 +63,6 @@ namespace WatchWebShop.Controllers
         }
 
         // GET: Products/Details/1
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -81,6 +80,56 @@ namespace WatchWebShop.Controllers
             }
 
             return View(product);
+        }
+
+        // GET: Products/Edit/1
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return View("Empty");
+            }
+
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return View("NotFound");
+            }
+
+            var productDropdownsData = await GetNewProductDropdownsValues();
+
+            ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+            ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+
+            return View(product);
+        }
+
+        public async Task<Product> UpdateAsync(int id, Product newProduct)
+        {
+            _context.Update(newProduct);
+            await _context.SaveChangesAsync();
+            return newProduct;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")] Product product)
+        {
+            if (id != product.Id)
+            {
+                return View("NotFound");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var productDropdownsData = await GetNewProductDropdownsValues();
+
+                ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+                ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+
+                return View(product);
+            }
+            await UpdateAsync(id, product);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
