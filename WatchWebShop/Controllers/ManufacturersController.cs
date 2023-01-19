@@ -79,5 +79,29 @@ namespace WatchWebShop.Controllers
             }
             return View(manufacturer);
         }
+
+        //GET: Manufacturers/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null)
+            {
+                return View("NotFound");
+            }
+            return View(manufacturerDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null)
+            {
+                return View("NotFound");
+            }
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
