@@ -131,5 +131,38 @@ namespace WatchWebShop.Controllers
             await UpdateAsync(id, product);
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Products/Delete/1
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return View("Empty");
+            }
+
+            var product = await _context.Products
+                .Include(m => m.Manufacturer)
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return View("NotFound");
+            }
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
