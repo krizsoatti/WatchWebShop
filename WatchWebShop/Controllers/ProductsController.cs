@@ -28,19 +28,9 @@ namespace WatchWebShop.Controllers
 
         //Get: Products/Create
 
-        public async Task<NewProductDropdownsVM> GetNewProductDropdownsValues()
-        {
-            var response = new NewProductDropdownsVM()
-            {
-                Manufacturers = await _service.GetAllManufacturersAsync(),
-                Categories = await _service.GetAllCategoriesAsync()
-            };
-            return response;
-        }
-
         public async Task<IActionResult> Create()
         {
-            var productDropdownsData = await GetNewProductDropdownsValues();
+            var productDropdownsData = await _service.GetNewProductDropdownValues();
 
             ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
             ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");

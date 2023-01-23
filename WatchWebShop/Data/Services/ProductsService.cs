@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Base;
+using WatchWebShop.Data.ViewModels;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Services
@@ -25,6 +27,21 @@ namespace WatchWebShop.Data.Services
         {
             var manufacturers = _context.Manufacturers.ToListAsync();
             return await manufacturers;
+        }
+
+        public async Task<ManufacturersImagesVM> GetManufacturersImagesValues()
+        {
+            var response = new ManufacturersImagesVM();
+            response.Manufacturers = await _context.Manufacturers.OrderBy(n => n.LogoPath).ToListAsync();
+            return response;
+        }
+
+        public async Task<NewProductDropdownsVM> GetNewProductDropdownValues()
+        {
+            var response = new NewProductDropdownsVM();
+            response.Manufacturers = await _context.Manufacturers.OrderBy(n => n.Name).ToListAsync();
+            response.Categories = await _context.Categories.OrderBy(c => c.Name).ToListAsync();
+            return response;
         }
 
         public async Task<Product> GetProductByIdAsync(int id)

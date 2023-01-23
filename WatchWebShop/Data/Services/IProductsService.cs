@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Base;
+using WatchWebShop.Data.ViewModels;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Services
@@ -11,5 +12,9 @@ namespace WatchWebShop.Data.Services
         Task<List<Category>> GetAllCategoriesAsync();
         Task<List<Manufacturer>> GetAllManufacturersAsync();
         Task<Product> GetProductByIdAsync(int id);
+
+        Task<NewProductDropdownsVM> GetNewProductDropdownValues();
+
+        Task<ManufacturersImagesVM> GetManufacturersImagesValues();
     }
 }
