@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Base;
 using WatchWebShop.Models;
@@ -12,6 +13,18 @@ namespace WatchWebShop.Data.Services
         public ProductsService(AppDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<List<Category>> GetAllCategoriesAsync()
+        {
+            var categories = _context.Categories.ToListAsync();
+            return await categories;
+        }
+
+        public async Task<List<Manufacturer>> GetAllManufacturersAsync()
+        {
+            var manufacturers = _context.Manufacturers.ToListAsync();
+            return await manufacturers;
         }
 
         public async Task<Product> GetProductByIdAsync(int id)

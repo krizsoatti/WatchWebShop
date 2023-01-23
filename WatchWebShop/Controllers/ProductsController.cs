@@ -22,33 +22,31 @@ namespace WatchWebShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //var allProducts = await _context.Products.Include(n => n.Manufacturer).Include(c => c.Category).ToListAsync();
-
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
             return View(allProducts);
         }
 
         //Get: Products/Create
 
-        //public async Task<NewProductDropdownsVM> GetNewProductDropdownsValues()
-        //{
-        //    var response = new NewProductDropdownsVM()
-        //    {
-        //        Manufacturers = await _context.Manufacturers.OrderBy(n => n.Name).ToListAsync(),
-        //        Categories = await _context.Categories.OrderBy(n => n.Name).ToListAsync()
-        //    };
-        //    return response;
-        //}
+        public async Task<NewProductDropdownsVM> GetNewProductDropdownsValues()
+        {
+            var response = new NewProductDropdownsVM()
+            {
+                Manufacturers = await _service.GetAllManufacturersAsync(),
+                Categories = await _service.GetAllCategoriesAsync()
+            };
+            return response;
+        }
 
-        //public async Task<IActionResult> Create()
-        //{
-        //    var productDropdownsData = await GetNewProductDropdownsValues();
+        public async Task<IActionResult> Create()
+        {
+            var productDropdownsData = await GetNewProductDropdownsValues();
 
-        //    ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
-        //    ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+            ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+            ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
 
-        //    return View();
-        //}
+            return View();
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> Create([Bind("Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")] Product product)
@@ -59,7 +57,7 @@ namespace WatchWebShop.Controllers
 
         //        ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
         //        ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
-                
+
         //        return View(product);
         //    }
         //    _context.Products.Add(product);
