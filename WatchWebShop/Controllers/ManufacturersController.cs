@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
+using WatchWebShop.Data.Services;
 using WatchWebShop.Models;
-using WatchWebShop.Services;
 
 namespace WatchWebShop.Controllers
 {

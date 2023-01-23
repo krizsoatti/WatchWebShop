@@ -2,7 +2,7 @@
 using WatchWebShop.Data.Base;
 using WatchWebShop.Models;
 
-namespace WatchWebShop.Services
+namespace WatchWebShop.Data.Services
 {
     public class ManufacturersService : EntityBaseRepository<Manufacturer>, IManufacturersService
     {

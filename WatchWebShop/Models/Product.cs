@@ -1,10 +1,11 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchWebShop.Data.Base;
 
 namespace WatchWebShop.Models
 {
-    public class Product
+    public class Product : IEntityBase
     {
         [Key]
         public int Id { get; set; }

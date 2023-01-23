@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
-using WatchWebShop.Services;
+using WatchWebShop.Data.Services;
 
 namespace WatchWebShop
 {
@@ -31,7 +31,7 @@ namespace WatchWebShop
 
             //Services configuration
             services.AddScoped<IManufacturersService, ManufacturersService>();
-
+            services.AddScoped<IProductsService, ProductsService>();
 
             services.AddControllersWithViews();
         }
