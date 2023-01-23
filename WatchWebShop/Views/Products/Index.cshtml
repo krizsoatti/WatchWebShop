@@ -14,7 +14,6 @@
     <h4 style="text-align:center">Our contracted partners</h4>
 </div>
 
-
 <div class="container" style="justify-content:center">
     <center>
         <img src="~/Images/Casio.png" alt="Casio" style="width:15%; padding-right: 10px">
@@ -71,6 +70,4 @@
     }
 </div>
 
-<div style="position:fixed; right:20px; bottom: 125px;" class="text-white">
-    <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
-</div>
+@await Html.PartialAsync("_CreateItem", "Products")

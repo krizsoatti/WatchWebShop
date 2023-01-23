@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Manufacturer>
+
+<div class="container" style="justify-content:center">
+    <center>
+        @foreach (var item in Model)
+        {
+            <img src="@item.LogoPath" alt="@item.Name" style="width:15%; padding-right: 10px">
+        }
+    </center>
+</div>
+<br />
