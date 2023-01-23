@@ -1,68 +1,58 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = "Details of the Product";
+    ViewData["Title"] = "Product Details";
 }
 
-<div class="row text">
-    <div class="col-md-8 offset-2">
-        <p>
-            <center><h1>@Model.Name</h1></center>
-        </p>
-        <div class="row">
-            <div class="col-md-8 offset-2">
-
-                <div class="form-group text-center">
-                    <img class="border-info" style="max-width: 250px" id="ImagePreview" />
+<center>
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @Model.Name
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="@Model.ImagePath" width="100%" alt="@Model.Name">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text">@Model.Description</p>
+                            <p class="card-text">
+                                <b>Manufacturer: </b>
+                                <a asp-controller="Manufacturers" asp-action="Details" asp-route-id="@Model.ManufacturerId">
+                                    @Model.Manufacturer.Name
+                                </a>
+                            </p>
+                            <p class="card-text"><b>Category: </b>@Model.Category.Name</p>
+                            <p class="card-text">
+                                <b>Status: </b>
+                                <span class="badge bg-success">In stock</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer">
+                            <p class="card-text">
+                                <a class="btn btn-outline-info float-right" asp-action="Index">
+                                    Back to List
+                                </a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.UnitPriceNetto.ToString("c"))</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ImagePath" class="control-label"></label>
-                    <input asp-for="ImagePath" class="form-control" readonly />
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" readonly />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                    <label asp-for="ManufacturerId" class="control-label"></label>
-                    <select asp-for="ManufacturerId" class="form-control" asp-items="ViewBag.Manufacturers"></select>
-                    <span asp-validation-for="ManufacturerId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CategoryId" class="control-label"></label>
-                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>*@
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" readonly />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UnitPriceNetto" class="control-label"></label>
-                    <input asp-for="UnitPriceNetto" class="form-control" readonly />
-                    <span asp-validation-for="UnitPriceNetto" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <a class="btn btn-danger text-white float-right" asp-action="Delete" asp-route-id="@Model.Id"><i class="bi bi-trash"></i>Delete </a>
-                    <a class="btn btn-outline-success float-right" style="margin-right:5px" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
-                </div>
-
-
             </div>
         </div>
     </div>
-</div>
+</center>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            var output = document.getElementById('ImagePreview');
-            output.src = $("#ImagePath").val();
-        })
-    </script>
-}
+<div style="position:fixed; right:20px; bottom: 125px;" class="text-white">
+    <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+</div>
