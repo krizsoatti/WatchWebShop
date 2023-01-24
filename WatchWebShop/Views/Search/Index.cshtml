@@ -1,0 +1,101 @@
+﻿@using WatchWebShop.Models
+
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+<br />
+
+
+@if (Model.Products.Count > 0)
+{
+    <h3>Products</h3>
+    <div>
+        <br />
+        @foreach (var product in Model.Products)
+        {
+            <h4>Title: @product.Name</h4>
+            <div class="col-md-6">
+                <img src="@product.ImagePath" width="50%" alt="@product.Name">
+            </div>
+            <br />
+            <div class="col-md-12">
+                <div class="card-footer ">
+                    <p class="card-text">
+                        <a class="btn btn-outline-primary float-right" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                            <i class="bi bi-eye-fill"></i> Show Details
+                        </a>
+                        <a class="btn btn-success text-white"
+                   asp-controller="Products"
+                   asp-action="AddItemToShoppingCart"
+                   asp-route-id="@product.Id">
+                            <i class="bi bi-cart-plus"></i> Add to Cart (Price: @product.UnitPriceNetto.ToString("c"))
+                        </a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@if (Model.Manufacturers.Count > 0)
+{
+    <h3>Manufacturers</h3>
+    <table class="table">
+        @foreach (var manufacturer in Model.Manufacturers)
+        {
+            <tbody>
+                <tr>
+                    <td class="align-middle">
+                        <img class="rounded-circle" src="@manufacturer.LogoPath" alt="@manufacturer.Name" style="max-width: 150px" />
+                    </td>
+                    <td class="align-middle">
+                        Name: @manufacturer.Name
+                    </td>
+
+                        <td class="align-middle">
+                        <a class="btn btn-outline-primary" asp-controller="Manufacturers" asp-action="Edit" asp-route-id="@manufacturer.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
+                        <a class="btn btn-outline-info" asp-controller="Manufacturers" asp-action="Details" asp-route-id="@manufacturer.Id"><i class="bi bi-eye"></i>Details </a> |
+                        <a class="btn btn-danger text-white" asp-controller="Manufacturers" asp-action="Delete" asp-route-id="@manufacturer.Id"><i class="bi bi-trash"></i>Delete </a>
+                        </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+
+@if (Model.Categories.Count > 0)
+{
+    <h3>Categories</h3>
+    <table class="table">
+
+        @foreach (var category in Model.Categories)
+        {
+            <tbody>
+                <tr>
+                    <td class="align-middle">
+                        Name: @category.Name
+                    </td>
+                    <td class="align-middle">
+                        Description: @category.TaxRate
+                    </td>
+
+                        <td class="align-middle">
+                        <a class="btn btn-outline-primary" asp-controller="Products" asp-action="Edit" asp-route-id="@category.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
+                        <a class="btn btn-outline-info" asp-controller="Products" asp-action="Details" asp-route-id="@category.Id"><i class="bi bi-eye"></i>Details </a> |
+                        <a class="btn btn-danger text-white" asp-controller="Products" asp-action="Delete" asp-route-id="@category.Id"><i class="bi bi-trash"></i>Delete </a>
+                        </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+
+@if (Model.Products.Count == 0 && Model.Manufacturers.Count == 0 && Model.Categories.Count == 0)
+{
+    <p>No results found.</p>
+}
