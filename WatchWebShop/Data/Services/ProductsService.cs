@@ -17,6 +17,21 @@ namespace WatchWebShop.Data.Services
             _context = context;
         }
 
+        public async Task AddNewProductAsync(NewProductVM data)
+        {
+            var newProduct = new Product()
+            {
+                Name = data.Name,
+                UnitPriceNetto = data.UnitPriceNetto,
+                ImagePath = data.ImagePath,
+                Description = data.Description,
+                CategoryId = data.CategoryId,
+                ManufacturerId = data.ManufacturerId
+            };
+            await _context.Products.AddAsync(newProduct);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
             var categories = _context.Categories.ToListAsync();

@@ -38,22 +38,23 @@ namespace WatchWebShop.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create([Bind("Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")] Product product)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        var productDropdownsData = await GetNewProductDropdownsValues();
+        [HttpPost]
+        public async Task<IActionResult> Create(NewProductVM product)
+        {
+            if (!ModelState.IsValid)
+            {
+                var productDropdownsData = await _service.GetNewProductDropdownValues();
 
-        //        ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
-        //        ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+                ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+                ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
 
-        //        return View(product);
-        //    }
-        //    _context.Products.Add(product);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+                return View(product);
+            }
+
+            await _service.AddNewProductAsync(product);
+            return RedirectToAction(nameof(Index));
+        }
+
 
         // GET: Products/Details/1
         public async Task<IActionResult> Details(int id)
