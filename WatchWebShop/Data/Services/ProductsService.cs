@@ -67,6 +67,23 @@ namespace WatchWebShop.Data.Services
                 .FirstOrDefaultAsync(n => n.Id == id);
             return await productDetails;
         }
+
+        public async Task UpdateProductAsync(NewProductVM product)
+        {
+            var dbProduct = _context.Products.FirstOrDefault(n => n.Id == product.Id);
+            
+            if (dbProduct != null)
+            {
+                dbProduct.Name = product.Name;
+                dbProduct.UnitPriceNetto = product.UnitPriceNetto;
+                dbProduct.ImagePath = product.ImagePath;
+                dbProduct.Description = product.Description;
+                dbProduct.CategoryId = product.CategoryId;
+                dbProduct.ManufacturerId = product.ManufacturerId;
+                await _context.SaveChangesAsync();
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 
 }

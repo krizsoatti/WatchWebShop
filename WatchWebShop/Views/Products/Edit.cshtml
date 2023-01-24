@@ -1,13 +1,13 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = "Update Product";
+    ViewData["Title"] = "Update or Delete Product";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Update Product</h1>
+            <h1>Update or Delete Product</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -50,7 +50,8 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Update" class="btn btn-success float-right" />
+                        <a class="btn btn-danger text-white float-right" asp-action="Delete" asp-route-id="@Model.Id"><i class="bi bi-trash"></i>Delete </a>
+                        <input type="submit" value="Update" style="margin-right:5px" class="btn btn-success float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>
 

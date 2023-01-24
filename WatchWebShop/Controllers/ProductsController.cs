@@ -27,7 +27,6 @@ namespace WatchWebShop.Controllers
         }
 
         //Get: Products/Create
-
         public async Task<IActionResult> Create()
         {
             var productDropdownsData = await _service.GetNewProductDropdownValues();
@@ -69,86 +68,78 @@ namespace WatchWebShop.Controllers
         }
 
         // GET: Products/Edit/1
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return View("NotFound");
-        //    }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var productDetail = await _service.GetProductByIdAsync(id);
+            if (productDetail == null)
+            {
+                return View("NotFound");
+            }
 
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null)
-        //    {
-        //        return View("NotFound");
-        //    }
+            var response = new NewProductVM()
+            {
+                Id = productDetail.Id,
+                Name = productDetail.Name,
+                UnitPriceNetto = productDetail.UnitPriceNetto,
+                ImagePath = productDetail.ImagePath,
+                Description = productDetail.Description,
+                CategoryId = productDetail.CategoryId,
+                ManufacturerId = productDetail.ManufacturerId
+            };
+            
+            var productDropdownsData = await _service.GetNewProductDropdownValues();
 
-        //    var productDropdownsData = await GetNewProductDropdownsValues();
+            ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+            ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
 
-        //    ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
-        //    ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+            return View(productDetail);
+        }
 
-        //    return View(product);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, NewProductVM product)
+        {
+            if (id != product.Id)
+            {
+                return View("NotFound");
+            }
 
-        //public async Task<Product> UpdateAsync(int id, Product newProduct)
-        //{
-        //    _context.Update(newProduct);
-        //    await _context.SaveChangesAsync();
-        //    return newProduct;
-        //}
+            if (!ModelState.IsValid)
+            {
+                var productDropdownsData = await _service.GetNewProductDropdownValues();
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id, Name, UnitPriceNetto, ImagePath, Description, CategoryId, ManufacturerId")] Product product)
-        //{
-        //    if (id != product.Id)
-        //    {
-        //        return View("NotFound");
-        //    }
+                ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
+                ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        var productDropdownsData = await GetNewProductDropdownsValues();
+                return View(product);
+            }
 
-        //        ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
-        //        ViewBag.Categories = new SelectList(productDropdownsData.Categories, "Id", "Name");
+            await _service.UpdateProductAsync(product);
+            return RedirectToAction(nameof(Index));
+        }
+        
+        //GET: Products/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var productDetail = await _service.GetProductByIdAsync(id);
+            if (productDetail == null)
+            {
+                return View("NotFound");
+            }
 
-        //        return View(product);
-        //    }
-        //    await UpdateAsync(id, product);
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return View(productDetail);
+        }
 
-        // GET: Products/Delete/1
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return View("NotFound");
-        //    }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var productDetails = await _service.GetByIdAsync(id);
+            if (productDetails == null)
+            {
+                return View("NotFound");
+            }
 
-        //    var product = await _context.Products
-        //        .Include(m => m.Manufacturer)
-        //        .Include(c => c.Category)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (product == null)
-        //    {
-        //        return View("NotFound");
-        //    }
-
-        //    return View(product);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null)
-        //    {
-        //        return View("NotFound");
-        //    }
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
