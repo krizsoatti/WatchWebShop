@@ -44,13 +44,6 @@ namespace WatchWebShop.Data.Services
             return await manufacturers;
         }
 
-        public async Task<ManufacturersImagesVM> GetManufacturersImagesValues()
-        {
-            var response = new ManufacturersImagesVM();
-            response.Manufacturers = await _context.Manufacturers.OrderBy(n => n.Name).ToListAsync();
-            return response;
-        }
-
         public async Task<NewProductDropdownsVM> GetNewProductDropdownValues()
         {
             var response = new NewProductDropdownsVM();

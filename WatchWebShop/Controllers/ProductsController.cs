@@ -23,10 +23,6 @@ namespace WatchWebShop.Controllers
         public async Task<IActionResult> Index()
         {
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
-
-            var manufacturersLogo = await _service.GetManufacturersImagesValues();
-            ViewBag.ManufacturersLogo = new SelectList(manufacturersLogo.Manufacturers, "Id", "LogoPath");
-
             return View(allProducts);
         }
 

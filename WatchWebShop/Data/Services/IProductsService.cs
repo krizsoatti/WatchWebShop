@@ -15,8 +15,5 @@ namespace WatchWebShop.Data.Services
         Task<NewProductDropdownsVM> GetNewProductDropdownValues();
         Task AddNewProductAsync(NewProductVM data);
         Task UpdateProductAsync(NewProductVM product);
-        
-        Task<ManufacturersImagesVM> GetManufacturersImagesValues();
-        
     }
 }
