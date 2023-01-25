@@ -47,7 +47,7 @@ namespace WatchWebShop.Data.Services
         public async Task<ManufacturersImagesVM> GetManufacturersImagesValues()
         {
             var response = new ManufacturersImagesVM();
-            response.Manufacturers = await _context.Manufacturers.OrderBy(n => n.LogoPath).ToListAsync();
+            response.Manufacturers = await _context.Manufacturers.OrderBy(n => n.Name).ToListAsync();
             return response;
         }
 
