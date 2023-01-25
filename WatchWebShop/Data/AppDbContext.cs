@@ -37,6 +37,7 @@ namespace WatchWebShop.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        //Order related tables
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
 
