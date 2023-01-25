@@ -28,9 +28,12 @@ namespace WatchWebShop.Controllers
             var manufacturers = await _manufacturersService.GetAllAsync();
             var categories = await _productsService.GetAllCategoriesAsync();
 
-            var filteredProducts = products.Where(n => string.Equals(n.Name, searchTerm, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
-            var filteredManufacturers = manufacturers.Where(n => string.Equals(n.Name, searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
-            var filteredCategories = categories.Where(n => string.Equals(n.Name, searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            var filteredProducts = products.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
+            n.Description.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
+            n.Manufacturer.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
+            n.Category.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            var filteredManufacturers = manufacturers.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            var filteredCategories = categories.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
 
             var searchResult = new SearchViewModel
             {
@@ -38,7 +41,7 @@ namespace WatchWebShop.Controllers
                 Manufacturers = filteredManufacturers,
                 Categories = filteredCategories
             };
-
+            
             return View("Index", searchResult);
         }
 
