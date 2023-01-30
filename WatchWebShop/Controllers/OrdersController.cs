@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using WatchWebShop.Data.Cart;
 using WatchWebShop.Data.Services;
 using WatchWebShop.Data.ViewModels;
@@ -28,6 +29,16 @@ namespace WatchWebShop.Controllers
             };
 
             return View(response);
+        }
+
+        public async Task<RedirectToActionResult> AddToShoppingCart(int id)
+        {
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product != null)
+            {
+                _shoppingCart.AddItemToShoppingCart(product);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
         }
     }
 }
