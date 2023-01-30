@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using WatchWebShop.Data.Cart;
 using WatchWebShop.Data.Services;
 using WatchWebShop.Data.ViewModels;
+using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
@@ -31,12 +32,22 @@ namespace WatchWebShop.Controllers
             return View(response);
         }
 
-        public async Task<RedirectToActionResult> AddToShoppingCart(int id)
+        public async Task<IActionResult> AddItemToShoppingCart(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
             if (product != null)
             {
                 _shoppingCart.AddItemToShoppingCart(product);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
+        {
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product != null)
+            {
+                _shoppingCart.RemoveItemFromCart(product);
             }
             return RedirectToAction(nameof(ShoppingCart));
         }

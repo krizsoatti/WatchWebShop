@@ -14,7 +14,7 @@ namespace WatchWebShop.Data.Cart
         private AppDbContext _context { get; set; }
 
         public string ShoppingCartId { get; set; }
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }   
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         public ShoppingCart(AppDbContext context)
         {
@@ -34,9 +34,7 @@ namespace WatchWebShop.Data.Cart
 
         public void AddItemToShoppingCart(Product product)
         {
-            var shoppingCartItem =
-                    _context.ShoppingCartItems.FirstOrDefault(
-                        s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
             {
@@ -58,9 +56,7 @@ namespace WatchWebShop.Data.Cart
 
         public void RemoveItemFromCart(Product product)
         {
-            var shoppingCartItem =
-                    _context.ShoppingCartItems.FirstOrDefault(
-                        s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem != null)
             {
