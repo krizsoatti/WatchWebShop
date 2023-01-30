@@ -1,4 +1,5 @@
-﻿using WatchWebShop.Data.Cart;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using WatchWebShop.Data.Cart;
 
 namespace WatchWebShop.Data.ViewModels
 {
@@ -6,5 +7,7 @@ namespace WatchWebShop.Data.ViewModels
     {
         public ShoppingCart ShoppingCart { get; set; }
         public double ShoppingCartTotal { get; set; }
+        public double ShoppingCartTotalBrutto { get; set; }
+        public Category TaxRate { get; set; }
     }
 }

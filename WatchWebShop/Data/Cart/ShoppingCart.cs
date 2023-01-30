@@ -1,5 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WatchWebShop.Models;
@@ -18,7 +21,18 @@ namespace WatchWebShop.Data.Cart
             _context = context;
         }
 
-        public void AddToCart(Product product)
+        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = services.GetService<AppDbContext>();
+
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+
+            return new ShoppingCart(context) { ShoppingCartId = cartId };
+        }
+
+        public void AddItemToShoppingCart(Product product)
         {
             var shoppingCartItem =
                     _context.ShoppingCartItems.FirstOrDefault(
@@ -30,14 +44,14 @@ namespace WatchWebShop.Data.Cart
                 {
                     ShoppingCartId = ShoppingCartId,
                     Product = product,
-                    Amount = 1
+                    Quantity = 1
                 };
 
                 _context.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.Quantity++;
             }
             _context.SaveChanges();
         }
@@ -50,9 +64,9 @@ namespace WatchWebShop.Data.Cart
 
             if (shoppingCartItem != null)
             {
-                if (shoppingCartItem.Amount > 1)
+                if (shoppingCartItem.Quantity > 1)
                 {
-                    shoppingCartItem.Amount--;
+                    shoppingCartItem.Quantity--;
                 }
                 else
                 {
@@ -75,8 +89,16 @@ namespace WatchWebShop.Data.Cart
         {
             var total = _context.ShoppingCartItems
                 .Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Product.UnitPriceNetto * c.Amount).Sum();
+                .Select(c => c.Product.UnitPriceNetto * c.Quantity).Sum();
             return total;
+        }
+
+        public double GetShoppingCartTotalBrutto()
+        {
+            var totalbrutto = _context.ShoppingCartItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Product.UnitPriceNetto * c.Quantity + ((c.Product.UnitPriceNetto * c.Quantity) *c.Product.Category.TaxRate)).Sum();
+            return totalbrutto;
         }
     }
 }

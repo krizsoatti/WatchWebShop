@@ -15,7 +15,7 @@ namespace WatchWebShop.Controllers
             _productService = productService;
             _shoppingCart = shoppingCart;
         }
-        public IActionResult Index()
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -23,7 +23,8 @@ namespace WatchWebShop.Controllers
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
-                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
+                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
+                ShoppingCartTotalBrutto = _shoppingCart.GetShoppingCartTotalBrutto()
             };
 
             return View(response);
