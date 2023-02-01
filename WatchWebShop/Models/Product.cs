@@ -14,18 +14,10 @@ namespace WatchWebShop.Models
         public string ImagePath { get; set; }
         public string Description { get; set; }
 
-        [Display(Name = "Product Category")]
-        public int CategoryId { get; set; }
-
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
-
-        [Display(Name = "Product Manufacturer")]
         public int ManufacturerId { get; set; }
-
-        [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }
 
-
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

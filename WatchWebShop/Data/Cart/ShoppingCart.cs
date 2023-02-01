@@ -96,5 +96,13 @@ namespace WatchWebShop.Data.Cart
                 .Select(c => (c.Product.UnitPriceNetto * c.Quantity) + (c.Product.UnitPriceNetto * c.Quantity * c.Product.Category.TaxRate)).Sum();
             return totalbrutto;
         }
+
+        public double GetCategoriesTaxRate()
+        {
+            var categoriesTaxRate = _context.ShoppingCartItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Product.Category.TaxRate).FirstOrDefault();
+            return categoriesTaxRate;
+        }
     }
 }

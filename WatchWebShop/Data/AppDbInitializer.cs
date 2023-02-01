@@ -57,7 +57,7 @@ namespace WatchWebShop.Data
                         new Product()
                         {
                             Name = "Casio G-Shock GM-S5600LC-7",
-                            Description = "Die G-SHOCK GM-5600 und ihr kleines Gegenstück, die GM-S5600, verfügen über eine edle Metall-Lünette und ein weißes Armband mit marineblauen Akzenten. Die Stoffband-Textur des Originals wurde in Form von Glasdruck auf den Zifferblättern wieder aufgegriffen, um ein hochwertiges Design zu schaffen.",
+                            Description = "Die G-SHOCK GM-5600 und ihr kleines Gegenstück, die GM-S5600, verfügen über eine edle Metall-Lünette und ein weißes Armband mit marineblauen Akzenten. Die Stoffband-Textur des Originals wurde in Form von Glasdruck aufgegriffen.",
                             UnitPriceNetto = 127.20,
                             ImagePath = "https://www.casio.com/content/dam/casio/product-info/locales/at/de/timepiece/product/watch/G/GM/GMS/gm-s5600lc-7/assets/GM-S5600LC-7.png",
                             CategoryId = 2,
@@ -67,7 +67,7 @@ namespace WatchWebShop.Data
                         new Product()
                         {
                             Name = "Citizen Rebel Pilot by Star Wars JG2108-52W",
-                            Description = "May the Force be with you, with this Rebel Pilot inspired watch from Citizen celebrating the Star Wars™ galaxy. Inspired by an original Citizen analog-digital watch from the 1980s, this stainless steel rectangular case watch is packed with features, including dual time and subdials with both the Rebel Alliance logo and the X-Wing with Rebel inspired colors. It also includes an alarm, the digital time, and the temperature, making it a unique and stand-out timepiece. This watch requires a battery. Whether you are a long-time fan who still believes the original trilogy can never be topped, or you’re just being introduced to this galaxy far, far away, this is a Star Wars watch every collector will want to show off.",
+                            Description = "May the Force be with you, with this Rebel Pilot inspired watch from Citizen celebrating the Star Wars™ galaxy. Inspired by an original Citizen analog-digital watch from the 1980s, unique and stand-out timepiece. This watch requires a battery.",
                             UnitPriceNetto = 240.00,
                             ImagePath = "https://citizenwatch.widen.net/content/qigtdjwdkh/jpeg/Rebel+Pilot.jpeg?u=41zuoe&width=500&height=625&quality=80&crop=false&keep=c&color=F9F8F6",
                             CategoryId = 3,
