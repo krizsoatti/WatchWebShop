@@ -11,5 +11,7 @@ namespace WatchWebShop.Models
 
         public string Name { get; set; }
         public double TaxRate { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }

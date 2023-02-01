@@ -26,7 +26,8 @@ namespace WatchWebShop.Controllers
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
-                ShoppingCartTotalBrutto = _shoppingCart.GetShoppingCartTotalBrutto()
+                ShoppingCartTotalBrutto = _shoppingCart.GetShoppingCartTotalBrutto(),
+                CategoriesTaxRate = _shoppingCart.GetCategoriesTaxRate()
             };
 
             return View(response);
