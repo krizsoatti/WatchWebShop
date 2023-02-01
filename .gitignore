@@ -370,3 +370,11 @@ FodyWeavers.xsd
 /WatchWebShop/Migrations/20230116071525_sajatGepFirst.Designer.cs
 /WatchWebShop/Migrations/20230116112526_LogoPathAdded.Designer.cs
 /WatchWebShop/Migrations/20230116112526_LogoPathAdded.cs
+/WatchWebShop/Migrations/20230201081456_test.Designer.cs
+/WatchWebShop/Migrations/20230201081456_test.cs
+/WatchWebShop/Migrations/20230130074601_ShoppingCartItems_Added.Designer.cs
+/WatchWebShop/Migrations/20230130074601_ShoppingCartItems_Added.cs
+/WatchWebShop/Migrations/20230201084640_Initial.Designer.cs
+/WatchWebShop/Migrations/20230201084640_Initial.cs
+/WatchWebShop/Migrations/20230201090124_Initial.Designer.cs
+/WatchWebShop/Migrations/20230201090124_Initial.cs
