@@ -7,6 +7,6 @@ namespace WatchWebShop.Data.Services
     public interface IOrdersService
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, Customer customer, Order orders);
-        Task<List<Order>> GetOrdersByUserIdAsync(int userId);
+        Task<List<Order>> GetOrdersByUserIdAsync(int customerId);
     }
 }
