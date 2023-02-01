@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Cart
@@ -103,6 +104,16 @@ namespace WatchWebShop.Data.Cart
                 .Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Product.Category.TaxRate).FirstOrDefault();
             return categoriesTaxRate;
+        }
+
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCartItems
+                .Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+
+            _context.ShoppingCartItems.RemoveRange(items);
+
+            await _context.SaveChangesAsync();
         }
     }
 }
