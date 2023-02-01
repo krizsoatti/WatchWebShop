@@ -5,29 +5,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using WatchWebShop.Data.Cart;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Services
 {
     public class OrdersService : IOrdersService
     {
-        private readonly AppDbContext _context;
+        private AppDbContext _dbContext;
 
-        public OrdersService(AppDbContext context)
+        public OrdersService(AppDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
+        public async Task<List<Order>> GetOrdersByUserIdAsync(int customerId)
         {
-            var orders = await _context.Orders.Include(n => n.OrderLines).ThenInclude(n => n.Product)
-                .Where(n => n.Customer.Id == userId).ToListAsync();
+            var orders = await _dbContext.Orders
+                .Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Product)
+                .ThenInclude(p => p.Category)
+                .Where(o => o.Id == customerId)
+                .ToListAsync();
+
             return orders;
         }
 
-        public Task StoreOrderAsync(List<ShoppingCartItem> items, Customer custromer, Order orders, OrderLine orderLines)
+        public async Task StoreOrderAsync(List<ShoppingCartItem> items, Customer customer, Order orders)
         {
-            throw new NotImplementedException();
+            var order = new Order
+            {
+                Id = customer.Id,
+                TotalPriceBrutto = orders.TotalPriceBrutto,
+                OrderedOn = DateTime.Now,
+                RecipientSalutation = customer.Salutation,
+                RecipientFirstName = customer.FirstName,
+                RecipientLastName = customer.LastName,
+                RecipientStreet = customer.Street,
+                RecipientZipCode = customer.ZipCode,
+                RecipientCity = customer.City
+            };
+            
+            await _dbContext.Orders.AddAsync(order);
+            await _dbContext.SaveChangesAsync();
+
+            foreach (var item in order.OrderLines)
+            {
+                var product = _dbContext.Products.Find(item.ProductId);
+                var orderLine = new OrderLine
+                {
+                    OrderId = order.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    UnitPriceNetto = product.UnitPriceNetto,
+                    TaxRate = product.Category.TaxRate
+                };
+               await _dbContext.OrderLines.AddAsync(orderLine);
+            }
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

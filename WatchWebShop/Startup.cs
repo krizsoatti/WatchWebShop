@@ -34,6 +34,7 @@ namespace WatchWebShop
             //Services configuration
             services.AddScoped<IManufacturersService, ManufacturersService>();
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<IOrdersService, OrdersService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
