@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace WatchWebShop.Models
 {
-    public class Customer
+    public class Customer : IdentityUser
     {
         [Key]
-        public int Id { get; set; }
+        new public int Id { get; set; }
 
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
@@ -17,7 +18,7 @@ namespace WatchWebShop.Models
         public string ZipCode { get; set; }
         public string City { get; set; }
 
-        public string PasswordHash { get; set; }
+        override public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
     }
 }

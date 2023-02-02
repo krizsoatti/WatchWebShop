@@ -23,10 +23,10 @@ namespace WatchWebShop.Models
 
         public string RecipientSalutation { get; set; }
         public string RecipientFirstName { get; set; }
-        public string RecipientLastName { get; set;}
-        public string RecipientStreet { get; set;}
+        public string RecipientLastName { get; set; }
+        public string RecipientStreet { get; set; }
         public string RecipientZipCode { get; set; }
-        public string RecipientCity { get; set;}
+        public string RecipientCity { get; set; }
 
         public List<OrderLine> OrderLines { get; set; }
     }

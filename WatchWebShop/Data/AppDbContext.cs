@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<Customer>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -16,10 +17,10 @@ namespace WatchWebShop.Data
                 .WithMany(m => m.Products)
                 .HasForeignKey(p => p.ManufacturerId);
 
-            //modelBuilder.Entity<Product>()
-            //    .HasOne(p => p.Category)
-            //    .WithMany(c => c.Products)
-            //    .HasForeignKey(p => p.CategoryId);
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId);
 
             modelBuilder.Entity<OrderLine>()
                 .HasOne(ol => ol.Order)
@@ -30,6 +31,10 @@ namespace WatchWebShop.Data
             //    .HasOne(ol => ol.Product)
             //    .WithMany(p => p.OrderLines)
             //    .HasForeignKey(ol => ol.ProductId);
+
+            base.OnModelCreating(modelBuilder);
+
+
         }
         
         public DbSet<Product> Products { get; set; }
