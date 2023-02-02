@@ -10,7 +10,9 @@ namespace WatchWebShop.Models
         [Key]
         public int Id { get; set; }
 
-        public Customer Customer { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
+
         public double TotalPriceBrutto { get; set; }
 
         [DataType(DataType.Date)]
