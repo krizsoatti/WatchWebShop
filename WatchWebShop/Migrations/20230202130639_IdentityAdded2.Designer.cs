@@ -10,8 +10,8 @@ using WatchWebShop.Data;
 namespace WatchWebShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230202124222_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20230202130639_IdentityAdded2")]
+    partial class IdentityAdded2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

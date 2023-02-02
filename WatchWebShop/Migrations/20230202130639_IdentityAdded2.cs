@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WatchWebShop.Migrations
 {
-    public partial class IdentityAdded : Migration
+    public partial class IdentityAdded2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
