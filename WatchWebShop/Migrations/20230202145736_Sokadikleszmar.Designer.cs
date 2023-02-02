@@ -10,8 +10,8 @@ using WatchWebShop.Data;
 namespace WatchWebShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230202130639_IdentityAdded2")]
-    partial class IdentityAdded2
+    [Migration("20230202145736_Sokadikleszmar")]
+    partial class Sokadikleszmar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,9 +216,6 @@ namespace WatchWebShop.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordSalt")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")

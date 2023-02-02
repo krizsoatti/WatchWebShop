@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using WatchWebShop.Data.Static;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data
@@ -75,6 +79,69 @@ namespace WatchWebShop.Data
                         }
                     });
                     context.SaveChanges();
+                }
+            }
+        }
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                //Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                }
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                }
+
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<Customer>>();
+                
+                string adminUserEmail = "krizsoattila@gmail.com";
+                
+                var adminuser = await userManager.FindByEmailAsync(adminUserEmail);
+                if (adminuser == null)
+                {
+                    var newAdminUser = new Customer()
+                    {
+                        EmailAddress = adminUserEmail,
+                        EmailConfirmed = true,
+                        UserName = "krizsoattila",
+                        Salutation = "Herr",
+                        FirstName = "Attila",
+                        LastName = "Krizso",
+                        Street = "Wagramer Straße 147",
+                        ZipCode = "1220",
+                        City = "Wien",
+                    };
+                    await userManager.CreateAsync(newAdminUser, "Coding@1234!");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                string appUserEmail = "user@watchwebshop.com";
+                var appuser = await userManager.FindByEmailAsync(appUserEmail);
+                if (appuser == null)
+                {
+                    var newAppUser = new Customer()
+                    {
+                        EmailAddress = appUserEmail,
+                        EmailConfirmed = true,
+                        UserName = "appuser",
+                        Salutation = "Herr",
+                        FirstName = "App",
+                        LastName = "User",
+                        Street = "Hauptstraße 5",
+                        ZipCode = "1010",
+                        City = "Wien",
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234!");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
         }
