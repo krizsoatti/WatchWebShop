@@ -21,6 +21,13 @@ namespace WatchWebShop.Controllers
             _ordersService = ordersService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            int customerId = 1;
+            var orders = await _ordersService.GetOrdersByUserIdAsync(customerId);
+            return View(orders);
+        }
+
         public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
