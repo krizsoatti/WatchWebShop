@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,11 +24,20 @@ namespace WatchWebShop.Data.Services
             return orders;
         }
 
-        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, int customerId)
+        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, int customerId, double totalPriceBrutto, string recipientSalutation, string recipientFirstName, string recipientLastName, string recipientStreet, string recipientZipCode, string recipientCity)
         {
             var order = new Order()
             {
-                CustomerId = customerId
+                CustomerId = customerId,
+                TotalPriceBrutto = totalPriceBrutto,
+                OrderedOn = DateTime.UtcNow,
+                PaidOn = DateTime.UtcNow,
+                RecipientSalutation = recipientSalutation,
+                RecipientFirstName = recipientFirstName,
+                RecipientLastName = recipientLastName,
+                RecipientStreet = recipientStreet,
+                RecipientZipCode = recipientZipCode,
+                RecipientCity = recipientCity,
             };
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
@@ -38,7 +49,7 @@ namespace WatchWebShop.Data.Services
                     OrderId = order.Id,
                     ProductId = item.Product.Id,
                     Quantity = item.Quantity,
-                    UnitPriceNetto = item.Product.UnitPriceNetto
+                    UnitPriceNetto = item.Product.UnitPriceNetto,
                 };
 
                 await _context.OrderLines.AddAsync(orderItem);

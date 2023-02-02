@@ -105,5 +105,12 @@ namespace WatchWebShop.Data.Cart
                 .Select(c => c.Product.Category.TaxRate).FirstOrDefault();
             return categoriesTaxRate;
         }
+
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+            _context.ShoppingCartItems.RemoveRange(items);
+            await _context.SaveChangesAsync();
+        }
     }
 }
