@@ -11,7 +11,7 @@ namespace WatchWebShop.Models
         public int Id { get; set; }
 
         [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; }         //ennek itten la stringnek kell lennie, mivel az ASP.Net Identity stringkent kezeli a regisztralt felhasznalo IDjet
 
         public double TotalPriceBrutto { get; set; }
 
