@@ -110,7 +110,7 @@ namespace WatchWebShop.Data
                 {
                     var newAdminUser = new Customer()
                     {
-                        EmailAddress = adminUserEmail,
+                        Email = adminUserEmail,
                         EmailConfirmed = true,
                         UserName = "krizsoattila",
                         Salutation = "Herr",
@@ -130,7 +130,7 @@ namespace WatchWebShop.Data
                 {
                     var newAppUser = new Customer()
                     {
-                        EmailAddress = appUserEmail,
+                        Email = appUserEmail,
                         EmailConfirmed = true,
                         UserName = "appuser",
                         Salutation = "Herr",

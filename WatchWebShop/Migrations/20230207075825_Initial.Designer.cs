@@ -10,8 +10,8 @@ using WatchWebShop.Data;
 namespace WatchWebShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230202145736_Sokadikleszmar")]
-    partial class Sokadikleszmar
+    [Migration("20230207075825_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,9 +188,6 @@ namespace WatchWebShop.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");

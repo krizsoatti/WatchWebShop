@@ -5,8 +5,8 @@ namespace WatchWebShop.Models
 {
     public class Customer : IdentityUser
     {
-        [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
+        //[DataType(DataType.EmailAddress)]
+        //public string Email { get; set; }
         public string Salutation { get; set; }     
         public string FirstName { get; set; }
         public string LastName { get; set; }
