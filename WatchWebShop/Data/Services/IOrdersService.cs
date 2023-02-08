@@ -8,9 +8,9 @@ namespace WatchWebShop.Data.Services
     public interface IOrdersService
     {
         Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, string customerId, 
-            string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn 
-            //string salutation, string firstName, string lastName, string street, string zipCode, 
-            //string city
+            string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn,
+            string salutation, string firstName, string lastName, string street, string zipCode,
+            string city
             );
         Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole);
     }

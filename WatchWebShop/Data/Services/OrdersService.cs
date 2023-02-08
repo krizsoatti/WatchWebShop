@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -12,10 +13,12 @@ namespace WatchWebShop.Data.Services
     public class OrdersService : IOrdersService
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<Customer> _userManager;
 
-        public OrdersService(AppDbContext context)
+        public OrdersService(AppDbContext context, UserManager<Customer> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole)
@@ -31,21 +34,21 @@ namespace WatchWebShop.Data.Services
             return orders;
         }
 
-        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, string customerId, string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn /*string salutation, string firstName, string lastName, string street, string zipCode, string city*/)
+        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, string customerId, string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn, string salutation, string firstName, string lastName, string street, string zipCode, string city)
         {
             var order = new Order()
             {
-                CustomerId = customerId,
-                CustomerEmail = customerEmail,
+                CustomerId = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().Id,
+                CustomerEmail = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().Email,
                 TotalPriceBrutto = totalBrutto,
                 OrderedOn = orderedOn,
                 PaidOn = paidOn,
-                //RecipientSalutation = salutation,
-                //RecipientFirstName = firstName,
-                //RecipientLastName = lastName,
-                //RecipientStreet = street,
-                //RecipientZipCode = zipCode,
-                //RecipientCity = city
+                RecipientSalutation = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().Salutation,
+                RecipientFirstName = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().FirstName,
+                RecipientLastName = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().LastName,
+                RecipientStreet = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().Street,
+                RecipientZipCode = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().ZipCode,
+                RecipientCity = _userManager.Users.Where(n => n.Id == customerId).FirstOrDefault().City
             };
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,13 +15,15 @@ namespace WatchWebShop.Controllers
         private readonly IProductsService _productService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
+        private readonly UserManager<Customer> _userManager;
 
 
-        public OrdersController(IProductsService productService, ShoppingCart shoppingCart, IOrdersService ordersService)
+        public OrdersController(IProductsService productService, ShoppingCart shoppingCart, IOrdersService ordersService, UserManager<Customer> userManager)
         {
             _productService = productService;
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -76,15 +79,14 @@ namespace WatchWebShop.Controllers
             double totalPriceBrutto = _shoppingCart.GetShoppingCartTotalBrutto();
             DateTime orderedOn = DateTime.Now;
             DateTime paidOn = DateTime.Now;
-            //string recipientSalutation = Request.Form["recipientSalutation"];
-            //string recipientFirstName = Request.Form["recipientFirstName"];
-            //string recipientLastName = Request.Form["recipientLastName"];
-            //string recipientStreet = Request.Form["recipientStreet"];
-            //string recipientZipCode = Request.Form["recipientZipCode"];
-            //string recipientCity = Request.Form["recipientCity"];
+            string salutation = User.FindFirstValue("Salutation");
+            string firstName = User.FindFirstValue("FirstName");
+            string lastName = User.FindFirstValue("LastName");
+            string street = User.FindFirstValue("Street");
+            string zipCode = User.FindFirstValue("ZipCode");
+            string city = User.FindFirstValue("City");
 
- 
-            await _ordersService.StoreOrderInTheDatabaseAsync(items, customerId, userEmail, totalPriceBrutto, orderedOn, paidOn);
+            await _ordersService.StoreOrderInTheDatabaseAsync(items, customerId, userEmail, totalPriceBrutto, orderedOn, paidOn, salutation, firstName, lastName, street, zipCode, city);
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");
         }
