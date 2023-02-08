@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WatchWebShop.Models;
 
@@ -6,7 +7,11 @@ namespace WatchWebShop.Data.Services
 {
     public interface IOrdersService
     {
-        Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, int customerId, double totalPriceBrutto, string recipientSalutation, string recipientFirstName, string recipientLastName, string recipientStreet, string recipientZipCode, string recipientCity);
-        Task<List<Order>> GetOrdersByUserIdAsync(int customerId);
+        Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, string customerId, 
+            string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn 
+            //string salutation, string firstName, string lastName, string street, string zipCode, 
+            //string city
+            );
+        Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole);
     }
 }

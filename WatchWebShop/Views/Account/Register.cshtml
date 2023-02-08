@@ -22,12 +22,19 @@
             <div class="col-md-8 offset-2">
                 <form asp-action="Register">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <br />
 
-                    <div class="form-group">
+                    @Html.DropDownListFor(m => m.Salutation, new SelectList(Enum.GetValues(typeof(Salutation)).Cast<Salutation>()), "Salutation", new { @class = "form-control" })
+                    
+                        @*<div class="form-group">
                         <label asp-for="Salutation" class="control-label"></label>
                         <input asp-for="Salutation" class="form-control" />
                         <span asp-validation-for="Salutation" class="text-danger"></span>
-                    </div>
+                    </div>*@
+
+                    <br />
+
                     <div class="form-group">
                         <label asp-for="FirstName" class="control-label"></label>
                         <input asp-for="FirstName" class="form-control" />

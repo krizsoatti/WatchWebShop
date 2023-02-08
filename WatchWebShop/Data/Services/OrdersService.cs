@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -17,27 +18,34 @@ namespace WatchWebShop.Data.Services
             _context = context;
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAsync(int customerId)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole)
         {
             var orders = await _context.Orders.Include(n => n.OrderLines)
                 .ThenInclude(n => n.Product).Where(n => n.CustomerId == customerId).ToListAsync();
+
+            if (userRole != "Admin")
+            {
+                orders = orders.Where(n => n.CustomerId == customerId).ToList();
+            }
+
             return orders;
         }
 
-        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, int customerId, double totalPriceBrutto, string recipientSalutation, string recipientFirstName, string recipientLastName, string recipientStreet, string recipientZipCode, string recipientCity)
+        public async Task StoreOrderInTheDatabaseAsync(List<ShoppingCartItem> items, string customerId, string customerEmail, double totalBrutto, DateTime orderedOn, DateTime paidOn /*string salutation, string firstName, string lastName, string street, string zipCode, string city*/)
         {
             var order = new Order()
             {
                 CustomerId = customerId,
-                TotalPriceBrutto = totalPriceBrutto,
-                OrderedOn = DateTime.UtcNow,
-                PaidOn = DateTime.UtcNow,
-                RecipientSalutation = recipientSalutation,
-                RecipientFirstName = recipientFirstName,
-                RecipientLastName = recipientLastName,
-                RecipientStreet = recipientStreet,
-                RecipientZipCode = recipientZipCode,
-                RecipientCity = recipientCity,
+                CustomerEmail = customerEmail,
+                TotalPriceBrutto = totalBrutto,
+                OrderedOn = orderedOn,
+                PaidOn = paidOn,
+                //RecipientSalutation = salutation,
+                //RecipientFirstName = firstName,
+                //RecipientLastName = lastName,
+                //RecipientStreet = street,
+                //RecipientZipCode = zipCode,
+                //RecipientCity = city
             };
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();

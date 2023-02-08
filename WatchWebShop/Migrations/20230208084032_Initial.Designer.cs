@@ -10,7 +10,7 @@ using WatchWebShop.Data;
 namespace WatchWebShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230207075825_Initial")]
+    [Migration("20230208084032_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -278,8 +278,11 @@ namespace WatchWebShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderedOn")
                         .HasColumnType("datetime2");

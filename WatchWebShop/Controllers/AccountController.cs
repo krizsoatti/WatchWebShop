@@ -82,7 +82,7 @@ namespace WatchWebShop.Controllers
                 Email = registerVM.Email,
                 EmailConfirmed = true,
                 UserName = registerVM.UserName,
-                Salutation = registerVM.Salutation,
+                Salutation = registerVM.Salutation.ToString(),
                 FirstName = registerVM.FirstName,
                 LastName = registerVM.LastName,
                 Street = registerVM.Street,
@@ -96,6 +96,13 @@ namespace WatchWebShop.Controllers
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
             return View("RegisterCompleted");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Products");
         }
     }
 }

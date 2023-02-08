@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Cart;
 using WatchWebShop.Data.Services;
@@ -23,8 +25,10 @@ namespace WatchWebShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            int customerId = 1;
-            var orders = await _ordersService.GetOrdersByUserIdAsync(customerId);
+            string customerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(customerId, userRole);
             return View(orders);
         }
 
@@ -67,16 +71,20 @@ namespace WatchWebShop.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            int customerId = 1;
+            string customerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmail = User.FindFirstValue(ClaimTypes.Email);
             double totalPriceBrutto = _shoppingCart.GetShoppingCartTotalBrutto();
-            string recipientSalutation = "Mr.";
-            string recipientFirstName = "John";
-            string recipientLastName = "Doe";
-            string recipientStreet = "Main Street 1";
-            string recipientZipCode = "12345";
-            string recipientCity = "New York";
+            DateTime orderedOn = DateTime.Now;
+            DateTime paidOn = DateTime.Now;
+            //string recipientSalutation = Request.Form["recipientSalutation"];
+            //string recipientFirstName = Request.Form["recipientFirstName"];
+            //string recipientLastName = Request.Form["recipientLastName"];
+            //string recipientStreet = Request.Form["recipientStreet"];
+            //string recipientZipCode = Request.Form["recipientZipCode"];
+            //string recipientCity = Request.Form["recipientCity"];
 
-            await _ordersService.StoreOrderInTheDatabaseAsync(items, customerId, totalPriceBrutto, recipientSalutation, recipientFirstName, recipientLastName, recipientStreet, recipientZipCode, recipientCity);
+ 
+            await _ordersService.StoreOrderInTheDatabaseAsync(items, customerId, userEmail, totalPriceBrutto, orderedOn, paidOn);
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");
         }

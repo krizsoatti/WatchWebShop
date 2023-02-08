@@ -7,7 +7,7 @@ namespace WatchWebShop.Data.ViewModels
     {
         [Display(Name = "Salutation")]
         [Required(ErrorMessage = "Salutation is required")]
-        public string Salutation { get; set; }
+        public Salutation Salutation { get; set; }
 
         [Display(Name = "First name")]
         [Required(ErrorMessage = "First name is required")]
@@ -51,5 +51,11 @@ namespace WatchWebShop.Data.ViewModels
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+    }
+
+    public enum Salutation
+    {
+        Herr,
+        Frau
     }
 }
