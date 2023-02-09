@@ -6,11 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data;
 using WatchWebShop.Data.Services;
+using WatchWebShop.Data.Static;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Admin)]
     public class ManufacturersController : Controller
     {
         private readonly IManufacturersService _service;

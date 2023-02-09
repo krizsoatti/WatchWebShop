@@ -113,5 +113,10 @@ namespace WatchWebShop.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Products");
         }
+
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            return View();
+        }
     }
 }
