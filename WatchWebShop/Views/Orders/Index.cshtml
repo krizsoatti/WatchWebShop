@@ -42,11 +42,12 @@
                             </ul>
                         </td>
 
+                        <td class="align-middle">
+                            @order.TotalPriceBrutto.ToString("c")
+                        </td>
+
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <td class="align-middle">
-                                @order.TotalPriceBrutto.ToString("c")
-                            </td>
                             <td class="align-middle">
                                 @order.CustomerEmail
                             </td>
