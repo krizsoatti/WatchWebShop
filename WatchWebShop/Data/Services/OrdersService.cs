@@ -23,8 +23,7 @@ namespace WatchWebShop.Data.Services
 
         public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole)
         {
-            var orders = await _context.Orders.Include(n => n.OrderLines)
-                .ThenInclude(n => n.Product).Where(n => n.CustomerId == customerId).ToListAsync();
+            var orders = await _context.Orders.Include(n => n.OrderLines).ThenInclude(n => n.Product).ToListAsync();
 
             if (userRole != "Admin")
             {
