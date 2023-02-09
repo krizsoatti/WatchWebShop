@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WatchWebShop.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Db5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

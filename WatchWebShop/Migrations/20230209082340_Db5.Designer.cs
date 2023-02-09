@@ -10,8 +10,8 @@ using WatchWebShop.Data;
 namespace WatchWebShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230208084032_Initial")]
-    partial class Initial
+    [Migration("20230209082340_Db5")]
+    partial class Db5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
