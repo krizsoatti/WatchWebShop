@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
@@ -10,6 +11,7 @@ using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IProductsService _productService;

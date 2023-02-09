@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
@@ -9,6 +10,7 @@ using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
+    [Authorize]
     public class ManufacturersController : Controller
     {
         private readonly IManufacturersService _service;
@@ -18,6 +20,7 @@ namespace WatchWebShop.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allManufacturers = await _service.GetAllAsync();
@@ -25,6 +28,7 @@ namespace WatchWebShop.Controllers
         }
 
         //GET: Manufacturers/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);

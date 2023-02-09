@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.InkML;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductsService _service;
@@ -20,6 +22,7 @@ namespace WatchWebShop.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
@@ -56,6 +59,7 @@ namespace WatchWebShop.Controllers
 
 
         // GET: Products/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var productDetail = await _service.GetProductByIdAsync(id);
