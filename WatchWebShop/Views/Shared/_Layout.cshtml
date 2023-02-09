@@ -23,16 +23,19 @@
                             <a class="nav-link text-dark" asp-controller="Products" asp-action="Index"><i class="bi bi-smartwatch"></i>Products</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-gear"></i> Management
-                            </a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Manufacturers" asp-action="Index"><i class="bi bi-bank"></i> Brands</a>
-                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index"><i class="bi bi-tags"></i> Categories</a>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Manufacturers" asp-action="Index"><i class="bi bi-bank"></i> Brands</a>
+                                    <a class="dropdown-item" asp-controller="Categories" asp-action="Index"><i class="bi bi-tags"></i> Categories</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" asp-controller="Search" asp-action="Search" style="padding-right: 25px;">
@@ -43,9 +46,9 @@
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-                    
-                    <partial name="_Identity.cshtml"/>
-                    
+
+                    <partial name="_Identity.cshtml" />
+
                 </div>
             </div>
         </nav>
