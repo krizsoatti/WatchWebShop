@@ -63,6 +63,20 @@ namespace WatchWebShop.Controllers
             return RedirectToAction(nameof(ShoppingCart));
         }
 
+        public async Task<IActionResult> AddItemToShoppingCart2(int id, int piece)
+        {
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product != null)
+            {
+                for (int i = 1; i <= piece; i++)
+                {
+                    _shoppingCart.AddItemToShoppingCart(product);
+                }
+                
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+
         public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
