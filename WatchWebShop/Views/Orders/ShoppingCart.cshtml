@@ -1,4 +1,5 @@
-﻿@using WatchWebShop.Data.ViewModels;
+﻿@using System.Globalization;
+@using WatchWebShop.Data.ViewModels;
 @model ShoppingCartVM
 
 @{
@@ -48,28 +49,79 @@
             <tfoot>
                 <tr>
                     <td colspan="2"></td>
-                    <td><b>Total:</b></td>
+                    <td><b>Total in €:</b></td>
                     <td>
-                        @Model.ShoppingCartTotal.ToString("c")
+                        @Model.ShoppingCartTotal.ToString("N2", CultureInfo.InvariantCulture)
                     </td>
                     <td>
-                        @Model.ShoppingCartTotalBrutto.ToString("c")
+                        <p id="total">@Model.ShoppingCartTotalBrutto.ToString("N2", CultureInfo.InvariantCulture)</p>
                     </td>
                     <td></td>
                 </tr>
             </tfoot>
         </table>
         
-        <div class="text-center">
+        <div class="text-right">
             <div class="btn-group">
+                <div id="paypal-btn"></div>
+                <span style="padding: 10px;"></span>
                 <a class="btn btn-outline-success" asp-controller="Products" asp-action="Index">
                     Add more items
                 </a>
-                <span style="padding: 10px;"></span>
-                <a class="btn btn-outline-primary" asp-controller="Orders" asp-action="CompleteOrder">
+                
+                @*<a class="btn btn-outline-primary" asp-controller="Orders" asp-action="CompleteOrder">
                     Complete Order
-                </a>
+                </a>*@
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+        //let _total = @Html.Raw(Model.ShoppingCartTotal);
+        paypal.Button.render({
+            //Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'Ac5eN6Km8BAscK3-D_AmUOy7OtCNcpjeT4J0igP0bg6kD1IZ9bHI4e9biY5k2spmB0P3jFfGGjxVFvDF'
+            },
+            // Customize button
+            locale: 'de_DE',
+            style: {
+                size: 'medium',
+                color: 'black',
+                shape: 'rect'
+            },
+            commit: true,
+            // Set up a payment
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: document.getElementById("total").innerHTML,
+                            currency: 'EUR'
+                        }
+                    }]
+                });
+            },
+            //Execute the payment
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    console.log('Payment has been processed.');
+                    setTimeout(function () { document.location.href = '@Url.Action("CompleteOrder", "Orders", new { })' }, 500);
+                });
+            },
+            onCancel: function (data, actions) {
+                window.alert('You\'ve cancelled payment!');
+            },
+            onError: function (error) {
+                window.alert(error);
+            }
+        }, '#paypal-btn')
+    </script>
+
+}
