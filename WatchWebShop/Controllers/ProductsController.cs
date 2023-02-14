@@ -146,5 +146,10 @@ namespace WatchWebShop.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Agb()
+        {
+            return View("Agb");
+        }
     }
 }
