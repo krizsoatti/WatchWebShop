@@ -1,4 +1,5 @@
 ﻿@model Product
+@using static WatchWebShop.Models.OrderLine
 
 @{
     ViewData["Title"] = "Product Details";
@@ -43,7 +44,16 @@
                                 <a class="btn btn-outline-info float-right" asp-action="Index">
                                     Back to List
                                 </a>
-                                <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.UnitPriceNetto.ToString("c"))</a>
+                                <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart2" asp-route-id="@Model.Id">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Add to Cart (Price @Model.UnitPriceNetto.ToString("c"))
+                                </a>
+
+                                <form asp-controller="Orders" asp-action="AddItemToShoppingCart2" asp-route-id="@Model.Id" method="post">
+                                    <input type="number" id="quantity" name="quantity" min="1" value="1" />
+                                    <button type="submit" name="addToCart" id="Submit" value="btnAdd">Add to cart</button>
+                                </form>
+
                             </p>
                         </div>
                     </div>
@@ -53,7 +63,7 @@
     </div>
 </center>
 
-@if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <div style="position:fixed; right:20px; bottom: 125px;" class="text-white">
         <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>

@@ -65,6 +65,8 @@ namespace WatchWebShop.Controllers
 
         public async Task<IActionResult> AddItemToShoppingCart2(int id, int piece)
         {
+            piece = Convert.ToInt32(HttpContext.Request.Form["quantity"]);
+
             var product = await _productService.GetProductByIdAsync(id);
             if (product != null)
             {
