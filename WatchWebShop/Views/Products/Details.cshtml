@@ -1,5 +1,4 @@
 ﻿@model Product
-@using static WatchWebShop.Models.OrderLine
 
 @{
     ViewData["Title"] = "Product Details";
@@ -24,7 +23,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <p class="card-text">@Model.Description</p>
+                            <p class="card-text text-justify">@Model.Description</p>
                             <p class="card-text">
                                 <b>Manufacturer: </b>
                                 <a asp-controller="Manufacturers" asp-action="Details" asp-route-id="@Model.ManufacturerId">

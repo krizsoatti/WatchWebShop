@@ -24,7 +24,7 @@ namespace WatchWebShop.Data.ViewModels
 
         [Display(Name = "Product Description")]
         [Required(ErrorMessage = "Please enter a product description")]
-        [StringLength(200, MinimumLength = 3, ErrorMessage = "Product description must be between 3 and 200 characters")]
+        [StringLength(500, MinimumLength = 3, ErrorMessage = "Product description must be between 3 and 200 characters")]
         public string Description { get; set; }
 
         [Display(Name = "Product Category")]
