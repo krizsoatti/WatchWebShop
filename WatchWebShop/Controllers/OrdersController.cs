@@ -108,5 +108,10 @@ namespace WatchWebShop.Controllers
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");
         }
+
+        public IActionResult ShowInvoice()
+        { 
+            return View("Rechnung"); 
+        }
     }
 }
