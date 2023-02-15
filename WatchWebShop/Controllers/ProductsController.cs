@@ -147,6 +147,7 @@ namespace WatchWebShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         public IActionResult Agb()
         {
             return View("Agb");
