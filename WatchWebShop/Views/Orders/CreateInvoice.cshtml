@@ -54,7 +54,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div align="center" style="font-size: 14px;font-weight: bold;">Order Number: #@Model.OrderId </div>
+                                <div align="center" style="font-size: 14px;font-weight: bold;">Rechnung Nr.: #0000 @Model.OrderId </div>
                             </td>
                         </tr>
                     </tbody>
@@ -260,13 +260,13 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right" style="font-size:12px;">USt.@Model.TaxRate</td>
-                                            <td align="right" style="font-size:12px;">€ @(Model.UnitPriceNetto * Model.TaxRate * Model.Quantity)</td>
+                                            <td align="right" style="font-size:12px;">USt. 20%</td>
+                                            <td align="right" style="font-size:12px;">€ @(Model.UnitPriceNetto * 0.2 * Model.Quantity)</td>
                                         </tr>
                                         <tr>
 
                                             <td align="right" style="font-size:12px;"><b>Gesamtpreis</b></td>
-                                            <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto</b></td>
+                                            <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto.ToString("N2")</b></td>
                                         </tr>
                                     </tbody>
                                 </table>

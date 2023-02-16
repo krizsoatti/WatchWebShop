@@ -111,12 +111,17 @@ namespace WatchWebShop.Controllers
             return View("OrderCompleted");
         }
 
-        public async Task<IActionResult> CreateInvoice(int orderId)
+        public async Task<IActionResult> CreateInvoice()
         {
-            var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var lastOrder = await _ordersService.GetLastOrderAsync(5);
-            var lastOrderLine = await _ordersService.GetLastOrderLineAsync(5);
-            var lastOrderLineProducts = await _ordersService.GetLastOrderLineProductsAsync(5);
+            //var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var lastOrder = await _ordersService.GetLastOrderAsync();
+
+            var lastOrderId = lastOrder.Id;
+            var customerId = lastOrder.CustomerId;
+            var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == customerId);
+
+            var lastOrderLine = await _ordersService.GetLastOrderLineAsync(lastOrderId);
+            var lastOrderLineProducts = await _ordersService.GetLastOrderLineProductsAsync(lastOrderId);
 
             var invoice = new InvoiceVM(customer, lastOrder, lastOrderLineProducts)
             {

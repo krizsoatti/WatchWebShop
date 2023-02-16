@@ -68,9 +68,9 @@ namespace WatchWebShop.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Order> GetLastOrderAsync(int orderId)
+        public async Task<Order> GetLastOrderAsync()
         {
-            var lastOrder = await _context.Orders.Where(o => o.Id == orderId).FirstOrDefaultAsync();
+            var lastOrder = await _context.Orders.OrderByDescending(n => n.Id).LastOrDefaultAsync();
             return lastOrder;
         }
 
@@ -82,8 +82,11 @@ namespace WatchWebShop.Data.Services
 
         public async Task<OrderLine> GetLastOrderLineProductsAsync(int orderId)
         {
+            List<OrderLine> orderLinesProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).ToListAsync();
+
             var lastOrderLineProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).FirstOrDefaultAsync();
-            return lastOrderLineProducts;
+
+            return orderLinesProducts.All(p => p.Product.Id == lastOrderLineProducts.Product.Id) ? lastOrderLineProducts : null;
         }
     }
 }
