@@ -115,7 +115,7 @@ namespace WatchWebShop.Controllers
         {
             var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
             var lastOrder = await _ordersService.GetLastOrderAsync(5);
-            //var lastOrderLine = await _ordersService.GetLastOrderLineAsync(5);
+            var lastOrderLine = await _ordersService.GetLastOrderLineAsync(5);
             var lastOrderLineProducts = await _ordersService.GetLastOrderLineProductsAsync(5);
 
             var invoice = new InvoiceVM(customer, lastOrder, lastOrderLineProducts)
