@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WatchWebShop.Data.ViewModels;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Services
@@ -65,6 +66,24 @@ namespace WatchWebShop.Data.Services
                 await _context.OrderLines.AddAsync(orderItem);
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Order> GetLastOrderAsync(int orderId)
+        {
+            var lastOrder = await _context.Orders.Where(o => o.Id == orderId).FirstOrDefaultAsync();
+            return lastOrder;
+        }
+
+        public async Task<OrderLine> GetLastOrderLineAsync(int orderId)
+        {
+            var lastOrderLine = await _context.OrderLines.Where(l => l.OrderId == orderId).FirstOrDefaultAsync();
+            return lastOrderLine;
+        }
+
+        public async Task<OrderLine> GetLastOrderLineProductsAsync(int orderId)
+        {
+            var lastOrderLineProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).FirstOrDefaultAsync();
+            return lastOrderLineProducts;
         }
     }
 }

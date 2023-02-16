@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Cart;
@@ -32,7 +34,7 @@ namespace WatchWebShop.Controllers
         {
             string customerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string userRole = User.FindFirstValue(ClaimTypes.Role);
-            
+
             var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(customerId, userRole);
             return View(orders);
         }
@@ -74,7 +76,7 @@ namespace WatchWebShop.Controllers
                 {
                     _shoppingCart.AddItemToShoppingCart(product);
                 }
-                
+
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
@@ -109,9 +111,33 @@ namespace WatchWebShop.Controllers
             return View("OrderCompleted");
         }
 
-        public IActionResult ShowInvoice()
-        { 
-            return View("Rechnung"); 
+        public async Task<IActionResult> CreateInvoice(int orderId)
+        {
+            var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var lastOrder = await _ordersService.GetLastOrderAsync(5);
+            //var lastOrderLine = await _ordersService.GetLastOrderLineAsync(5);
+            var lastOrderLineProducts = await _ordersService.GetLastOrderLineProductsAsync(5);
+
+            var invoice = new InvoiceVM(customer, lastOrder, lastOrderLineProducts)
+            {
+                OrderId = lastOrder.Id,
+                CustomerId = lastOrder.CustomerId,
+                CustomerEmail = lastOrder.CustomerEmail,
+                OrderedOn = lastOrder.OrderedOn,
+                PaidOn = lastOrder.PaidOn,
+                Salutation = customer.Salutation,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Street = customer.Street,
+                ZipCode = customer.ZipCode,
+                City = customer.City,
+                ProductName = lastOrderLineProducts.Product.Name,
+                Quantity = lastOrderLineProducts.Quantity,
+                UnitPriceNetto = lastOrderLineProducts.UnitPriceNetto,
+                TotalPriceBrutto = lastOrder.TotalPriceBrutto
+            };
+
+            return View(invoice);
         }
     }
 }

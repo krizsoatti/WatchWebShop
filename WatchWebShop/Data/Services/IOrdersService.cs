@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WatchWebShop.Data.ViewModels;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Data.Services
@@ -12,6 +13,11 @@ namespace WatchWebShop.Data.Services
             string salutation, string firstName, string lastName, string street, string zipCode,
             string city
             );
+
         Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole);
+
+        Task<Order> GetLastOrderAsync(int orderId);
+        Task<OrderLine> GetLastOrderLineAsync(int orderLineId);
+        Task<OrderLine> GetLastOrderLineProductsAsync(int orderLineId);
     }
 }

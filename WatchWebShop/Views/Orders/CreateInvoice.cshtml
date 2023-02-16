@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using WatchWebShop.Models;
+@using System.Globalization;
+@using WatchWebShop.Data.ViewModels;
+@model InvoiceVM
+
+<!DOCTYPE html>
 <html xmlns="https://www.w3.org/1999/xhtml">
 
 <head>
@@ -25,8 +30,8 @@
                         <tbody>
                             <tr>
                                 <td valign="top" width="35%" style="font-size:12px;">
-                                    <strong>[Name des Kundenunternehmens]</strong><br>
-                                    [Adresse des Kundenunternehmens] <br>StNr.: [Steuernummer]<br>UID-Nr.: [UID-Nr. des Kunden]<br>
+                                    <strong>@Model.Customer.Salutation @Model.Customer.FirstName @Model.Customer.LastName</strong><br>
+                                    @Model.Customer.Street <br>City: @Model.Customer.City<br>ZipCode: @Model.Customer.ZipCode<br>
 
                                 </td>
                                 <td valign="top" width="35%">
@@ -43,7 +48,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <div align="center" style="font-size: 14px;font-weight: bold;">Rechnung Nr. 109 </div>
+                                    <div align="center" style="font-size: 14px;font-weight: bold;">@Model.OrderId </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -65,22 +70,25 @@
                             <tr style="display:none;">
                                 <td colspan="*"></td>
                             </tr>
-                            <tr>
+                            @foreach (var item in Model.OrderLine.Order.OrderLines)
+                            {
+                                <tr>
+                                    <td valign="top" style="font-size:12px;">@Model.ProductName</td> @*Produkt Name*@
+                                    <td valign="top" style="font-size:12px;">@Model.Quantity </td> @*Produkt Menge*@
+                                    <td valign="top" style="font-size:12px;">@Model.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
+                                    <td valign="top" style="font-size:12px;">@(Model.Quantity * Model.UnitPriceNetto) </td> @*Produkt Gesamt Preis Netto*@
 
-                                <td valign="top" style="font-size:12px;">Mein Produkt</td>
-                                <td valign="top" style="font-size:12px;">5 </td>
-                                <td valign="top" style="font-size:12px;">114,00 </td>
-                                <td valign="top" style="font-size:12px;">570,00 </td>
+                                </tr>
+                            }
 
-                            </tr>
-                            <tr>
+                            @*<tr>
 
                                 <td valign="top" style="font-size:12px;">Meine Dienstleistung</td>
                                 <td valign="top" style="font-size:12px;">1 </td>
                                 <td valign="top" style="font-size:12px;">230,00 </td>
                                 <td valign="top" style="font-size:12px;">230,00 </td>
 
-                            </tr>
+                            </tr>*@
                             <tr>
 
                                 <td valign="top" style="font-size:12px;">&nbsp;</td>
@@ -247,7 +255,7 @@
                                             <tr>
 
                                                 <td align="right" style="font-size:12px;"><b>Gesamtpreis</b></td>
-                                                <td align="right" style="font-size:12px;"><b>€ 960,00</b></td>
+                                                <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto</b></td>
                                             </tr>
                                         </tbody>
                                     </table>

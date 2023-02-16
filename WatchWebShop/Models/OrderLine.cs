@@ -10,6 +10,8 @@ namespace WatchWebShop.Models
         
         public int Quantity { get; set; }
         public double UnitPriceNetto { get; set; }
+
+        [ForeignKey("Category")]
         public double TaxRate { get; set; }
 
         public int OrderId { get; set; }
