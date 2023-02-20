@@ -68,25 +68,25 @@ namespace WatchWebShop.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Order> GetLastOrderAsync()
+        public async Task<Order> GetLastOrderAsync(string userId)
         {
-            var lastOrder = await _context.Orders.OrderByDescending(n => n.Id).LastOrDefaultAsync();
+            //var lastOrder = await _context.Orders.OrderByDescending(n => n.Id).LastOrDefaultAsync();
+            var lastOrder = await _context.Orders.Where(n => n.CustomerId == userId).OrderByDescending(n => n.Id).FirstOrDefaultAsync();
             return lastOrder;
         }
 
-        public async Task<OrderLine> GetLastOrderLineAsync(int orderId)
+        public async Task<List<OrderLine>> GetLastOrderLineAsync(int orderId)
         {
-            var lastOrderLine = await _context.OrderLines.Where(l => l.OrderId == orderId).FirstOrDefaultAsync();
-            return lastOrderLine;
+            var lastOrderLines = await _context.OrderLines.Where(l => l.OrderId == orderId).ToListAsync();
+            return lastOrderLines;
         }
 
-        public async Task<OrderLine> GetLastOrderLineProductsAsync(int orderId)
+        public async Task<List<Product>> GetLastOrderLineProductsAsync(int orderId)
         {
-            List<OrderLine> orderLinesProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).ToListAsync();
-
-            var lastOrderLineProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).FirstOrDefaultAsync();
-
-            return orderLinesProducts.All(p => p.Product.Id == lastOrderLineProducts.Product.Id) ? lastOrderLineProducts : null;
+            var orderLinesProducts = await _context.OrderLines.Where(p => p.OrderId == orderId).Include(p => p.Product).ToListAsync();
+            var products = from p in orderLinesProducts
+                           select p.Product;
+            return products.ToList();
         }
     }
 }

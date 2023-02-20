@@ -36,8 +36,8 @@
                     <tbody>
                         <tr>
                             <td valign="top" width="35%" style="font-size:12px;">
-                                <strong>@Model.Customer.Salutation @Model.Customer.FirstName @Model.Customer.LastName</strong><br>
-                                @Model.Customer.Street <br>City: @Model.Customer.City<br>ZipCode: @Model.Customer.ZipCode<br>
+                                <strong>@Model.Salutation @Model.FirstName @Model.LastName</strong><br>
+                                @Model.Street <br>City: @Model.City<br>ZipCode: @Model.ZipCode<br>
 
                             </td>
                             <td valign="top" width="35%">
@@ -76,19 +76,18 @@
                         <tr style="display:none;">
                             <td colspan="*"></td>
                         </tr>
-                        @foreach (var orderLine in Model.Order.OrderLines)
-                        {
-                            @foreach (var product in orderLine.Order.OrderLines)
-                            {
-                                <tr>
-                                    <td valign="top" style="font-size:12px;">@product.Product.Name</td> @*Produkt Name*@
-                                    <td valign="top" style="font-size:12px;">@product.Quantity </td> @*Produkt Menge*@
-                                    <td valign="top" style="font-size:12px;">@product.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
-                                    <td valign="top" style="font-size:12px;">@(product.Quantity * product.UnitPriceNetto) </td> @*Produkt Gesamt Preis Netto*@
 
-                                </tr>
-                            }
-                            
+                        @foreach (var orderline in Model.OrderLines)
+                        {
+
+                            <tr>
+                                <td valign="top" style="font-size:12px;">@orderline.Product.Name</td> @*Produkt Name*@
+                                <td valign="top" style="font-size:12px;">@orderline.Quantity </td> @*Produkt Menge*@
+                                <td valign="top" style="font-size:12px;">@orderline.Product.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
+                                <td valign="top" style="font-size:12px;">@(orderline.Quantity * orderline.Product.UnitPriceNetto)</td> @*Produkt Gesamt Preis Netto*@
+
+                            </tr>
+
                         }
 
                         @*<tr>
@@ -254,19 +253,19 @@
                                 <table width="100%" cellspacing="0" cellpadding="2" border="0">
                                     <tbody>
                                         <tr>
-                                            <td align="right" style="font-size:12px;">Gesamt</td>
-                                            <td align="right" style="font-size:12px;">€ @(Model.UnitPriceNetto * Model.Quantity)</td>
+                                            <td align="right" style="font-size:12px;">Gesamt Netto</td>
+                                            <td align="right" style="font-size:12px;">€ @Model.TotalPriceNetto</td>
                                             <td>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right" style="font-size:12px;">USt. 20%</td>
-                                            <td align="right" style="font-size:12px;">€ @(Model.UnitPriceNetto * 0.2 * Model.Quantity)</td>
+                                            <td align="right" style="font-size:12px;">USt.: @(Model.CategoriesTaxRate * 100)%</td>
+                                            <td align="right" style="font-size:12px;">€ @(Model.TotalPriceNetto * 0.2)</td>
                                         </tr>
                                         <tr>
 
-                                            <td align="right" style="font-size:12px;"><b>Gesamtpreis</b></td>
-                                            <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto.ToString("N2")</b></td>
+                                            <td align="right" style="font-size:12px;"><b>Gesamtpreis Brutto</b></td>
+                                            <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto</b></td>
                                         </tr>
                                     </tbody>
                                 </table>

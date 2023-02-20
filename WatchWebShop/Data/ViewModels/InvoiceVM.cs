@@ -9,15 +9,12 @@ namespace WatchWebShop.Data.ViewModels
 {
     public class InvoiceVM
     {
-        //[ForeignKey("ShoppingCartId")]
-        //public ShoppingCart ShoppingCart { get; set; }
-        //public double ShoppingCartTotal { get; set; }
-        //public double ShoppingCartTotalBrutto { get; set; }
         
         public double CategoriesTaxRate { get; set; }
 
         [ForeignKey("OrderLineId")]
         public OrderLine OrderLine { get; set; }
+        public List<OrderLine> OrderLines { get; set; }
         public int OrderLineId { get; set; }
 
         [ForeignKey("CustomerId")]
@@ -45,15 +42,10 @@ namespace WatchWebShop.Data.ViewModels
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
+        public List<Product> Products { get; set; }
         public int Quantity { get; set; }
-        public double UnitPriceNetto { get; set; }
+        public double TotalPriceNetto { get; set; }
         public double TaxRate { get; set; }
 
-        public InvoiceVM(Customer customer, Order order, OrderLine orderLine)
-        {
-            Customer = customer;
-            Order = order;
-            OrderLine = orderLine;
-        }
     }
 }

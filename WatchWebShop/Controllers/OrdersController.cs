@@ -113,35 +113,41 @@ namespace WatchWebShop.Controllers
 
         public async Task<IActionResult> CreateInvoice()
         {
-            //var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var lastOrder = await _ordersService.GetLastOrderAsync();
+            //first find the logged in user
+            //than find the last order of the user
+            //than find all orderlines in the last order
+            //than find all products in the orderlines
+            //than create an invoice
 
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            var loggedInUserId = loggedInUser.Id;
+            
+            var lastOrder = await _ordersService.GetLastOrderAsync(loggedInUserId);
             var lastOrderId = lastOrder.Id;
-            var customerId = lastOrder.CustomerId;
-            var customer = await _userManager.Users.FirstOrDefaultAsync(c => c.Id == customerId);
 
-            var lastOrderLine = await _ordersService.GetLastOrderLineAsync(lastOrderId);
+            var lastOrderLines = await _ordersService.GetLastOrderLineAsync(lastOrderId);
             var lastOrderLineProducts = await _ordersService.GetLastOrderLineProductsAsync(lastOrderId);
 
-            var invoice = new InvoiceVM(customer, lastOrder, lastOrderLineProducts)
+            var invoice = new InvoiceVM()
             {
-                OrderId = lastOrder.Id,
-                CustomerId = lastOrder.CustomerId,
-                CustomerEmail = lastOrder.CustomerEmail,
+                OrderId= lastOrderId,
+                CustomerId = loggedInUserId,
+                CustomerEmail = loggedInUser.Email,
                 OrderedOn = lastOrder.OrderedOn,
                 PaidOn = lastOrder.PaidOn,
-                Salutation = customer.Salutation,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Street = customer.Street,
-                ZipCode = customer.ZipCode,
-                City = customer.City,
-                ProductName = lastOrderLineProducts.Product.Name,
-                Quantity = lastOrderLineProducts.Quantity,
-                UnitPriceNetto = lastOrderLineProducts.UnitPriceNetto,
-                TotalPriceBrutto = lastOrder.TotalPriceBrutto
-            };
+                Salutation = loggedInUser.Salutation,
+                FirstName = loggedInUser.FirstName,
+                LastName = loggedInUser.LastName,
+                Street = loggedInUser.Street,
+                ZipCode = loggedInUser.ZipCode,
+                City = loggedInUser.City,
+                Products = lastOrderLineProducts,
+                OrderLines = lastOrderLines,
+                TotalPriceBrutto = lastOrder.TotalPriceBrutto,
+                CategoriesTaxRate = lastOrderLines.Select(x => x.TaxRate).Last(),
+                TotalPriceNetto = lastOrderLines.Select(c => c.Product.UnitPriceNetto * c.Quantity).Sum()
 
+        };
             return View(invoice);
         }
     }
