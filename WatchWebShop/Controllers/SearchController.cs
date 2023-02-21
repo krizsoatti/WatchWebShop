@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WatchWebShop.Data.Services;
+using WatchWebShop.Data.Static;
 using WatchWebShop.Models;
 
 namespace WatchWebShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class SearchController : Controller
     {
         private readonly IProductsService _productsService;

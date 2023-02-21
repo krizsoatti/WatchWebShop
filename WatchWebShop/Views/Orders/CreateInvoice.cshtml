@@ -17,6 +17,11 @@
 
 <body style="font-family:Tahoma;font-size:12px;color: #333333;background-color:#FFFFFF;">*@
 
+@*<p>Click the button to print or save your invoice.</p>
+
+<button onclick="window.print()">Print or save the invoice</button>*@
+
+
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="height:842px; width:595px;font-size:12px;">
     <tbody>
         <tr>
@@ -164,20 +169,3 @@
 @*</body>
 </html>*@
 
-@*@section Script{
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-           let printButton = document.getElementById("print");
-           let container = document.getElementById("container");
-
-           printButton.addEventListener("click", event => {
-                event.preventDefault();
-                printLink.style.display = "none";
-                window.print();
-        }, false);
-
-        container.addEventListener("click", event => {
-           printLink.style.display = "flex";
-        }, false);
-    </script>
-}*@
