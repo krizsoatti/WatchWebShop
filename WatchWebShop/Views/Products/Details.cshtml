@@ -4,12 +4,15 @@
     ViewData["Title"] = "Product Details";
 }
 
+<br />
+<br />
+<br />
 <center>
-    <div class="row">
+    <div class="row align-content-center">
         <div class="col-md-8 offset-2">
-            <div class="card mb-3" style="max-width: 540px;">
+            <div class="card mb-4">
                 <div class="row g-0">
-                    <div class="col-md-12">
+                    <div class="container-fluid col-md-0">
                         <div class="card-header text-white bg-info">
                             <p class="card-text">
                                 <h5 class="card-title">
@@ -32,9 +35,12 @@
                             </p>
                             <p class="card-text"><b>Category: </b>@Model.Category.Name</p>
                             <p class="card-text">
-                                <b>Status: </b>
-                                <span class="badge bg-success">In stock</span>
+                                <b>Price: @Model.UnitPriceNetto.ToString("c")</b>
                             </p>
+                            @*<p class="card-text">
+                            <b>Status: </b>
+                            <span class="badge bg-success">In stock</span>
+                            </p>*@
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -43,10 +49,10 @@
                                 <a class="btn btn-outline-info float-right" asp-action="Index">
                                     Back to List
                                 </a>
-                                <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart2" asp-route-id="@Model.Id">
-                                    <i class="bi bi-cart-plus"></i>
-                                    Add to Cart (Price @Model.UnitPriceNetto.ToString("c"))
-                                </a>
+                                @*<a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart2" asp-route-id="@Model.Id">
+                                <i class="bi bi-cart-plus"></i>
+                                Add to Cart (Price @Model.UnitPriceNetto.ToString("c"))
+                                </a>*@
 
                                 <form asp-controller="Orders" asp-action="AddItemToShoppingCart2" asp-route-id="@Model.Id" method="post">
                                     <input type="number" id="quantity" name="quantity" min="1" value="1" />
