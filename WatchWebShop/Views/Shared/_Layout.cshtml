@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body id="valami">
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container-fluid">
                 @*<a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">WatchWebShop</a>*@
                 <img src="~/Images/watchShopLogo.jpg" width="150px" height="auto" title="WebshopLogo">
                 @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
                 </button>*@
                 <text>   </text>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -57,7 +57,7 @@
         </nav>
     </header>
 
-    <div class="container-fluid bg-secondary">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -75,3 +75,14 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    /*.pb-3 {
+        background-color: lightgray;
+    }*/
+
+    #valami{
+        background-color: lightgray;
+    }
+
+</style>
