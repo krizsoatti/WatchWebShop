@@ -144,7 +144,7 @@ namespace WatchWebShop.Controllers
                 Products = lastOrderLineProducts,
                 OrderLines = lastOrderLines,
                 TotalPriceBrutto = lastOrder.TotalPriceBrutto,
-                CategoriesTaxRate = lastOrderLines.Select(x => x.TaxRate).Last(),
+                CategoriesTaxRate = lastOrderLines.Select(x => x.TaxRate).FirstOrDefault(),
                 TotalPriceNetto = lastOrderLines.Select(c => c.Product.UnitPriceNetto * c.Quantity).Sum()
 
         };

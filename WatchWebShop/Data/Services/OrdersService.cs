@@ -53,6 +53,7 @@ namespace WatchWebShop.Data.Services
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
+            //rajonni miert nem veszi at a taxratet
             foreach (var item in items)
             {
                 var orderItem = new OrderLine()
@@ -61,6 +62,7 @@ namespace WatchWebShop.Data.Services
                     ProductId = item.Product.Id,
                     Quantity = item.Quantity,
                     UnitPriceNetto = item.Product.UnitPriceNetto,
+                    TaxRate = 0.2
                 };
 
                 await _context.OrderLines.AddAsync(orderItem);

@@ -7,165 +7,160 @@
     ViewData["Title"] = "Invoice";
 }
 
-
-@*<!DOCTYPE html>
-<html xmlns="https://www.w3.org/1999/xhtml">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-
-<body style="font-family:Tahoma;font-size:12px;color: #333333;background-color:#FFFFFF;">*@
-
-@*<p>Click the button to print or save your invoice.</p>
-
-<button onclick="window.print()">Print or save the invoice</button>*@
-
-
-<table align="center" border="0" cellpadding="0" cellspacing="0" style="height:842px; width:595px;font-size:12px;">
-    <tbody>
-        <tr>
-            <td valign="top">
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td valign="bottom" width="50%" height="50">
-                                <div align="left"><img src="~/Images/watchShopLogo.jpg" style="width:50%; height:50%"></div><br>
-                            </td>
-
-                            <td width="50%">&nbsp;</td>
-                        </tr>
-                    </tbody>
-                </table>Empfänger: <br><br>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td valign="top" width="35%" style="font-size:12px;">
-                                <strong>@Model.Salutation @Model.FirstName @Model.LastName</strong><br>
-                                @Model.Street <br>City: @Model.City<br>ZipCode: @Model.ZipCode<br>
-
-                            </td>
-                            <td valign="top" width="35%">
-                            </td>
-                            <td valign="top" width="30%" style="font-size:12px;">
-                                Rechnungsdatum: @Model.OrderedOn.ToShortDateString()<br>
-                                Fälligkeitsdatum: @Model.PaidOn.ToShortDateString()<br>
-                                Lieferdatum: @Model.PaidOn.AddDays(7).ToShortDateString()
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table width="100%" height="100" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div align="center" style="font-size: 14px;font-weight: bold;">Rechnung Nr.: #0000 @Model.OrderId </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table width="100%" cellspacing="0" cellpadding="2" border="1" bordercolor="#CCCCCC">
-                    <tbody>
-                        <tr>
-
-                            <td width="35%" bordercolor="#ccc" bgcolor="lightgray" style="font-size:12px;">
-                                <strong>
-                                    Beschreibung
-                                </strong>
-                            </td>
-                            <td bordercolor="#ccc" bgcolor="lightgray" style="font-size:12px;"><strong>Menge(Stück)</strong></td>
-                            <td bordercolor="#ccc" bgcolor="lightgray" style="font-size:12px;"><strong>Unitpreis in € (netto) </strong></td>
-                            <td bordercolor="#ccc" bgcolor="lightgray" style="font-size:12px;"><strong>Gesamtpreis in € (netto)</strong></td>
-
-                        </tr>
-                        <tr style="display:none;">
-                            <td colspan="*"></td>
-                        </tr>
-
-                        @foreach (var orderline in Model.OrderLines)
-                        {
-
+<br />
+<div id="printableArea">
+    <table align="center" border="3" cellpadding="0" cellspacing="0" style="height:842px; width:595px;font-size:12px; background-color:azure">
+        <tbody>
+            <tr>
+                <td valign="top">
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
                             <tr>
-                                <td valign="top" style="font-size:12px;">@orderline.Product.Name</td> @*Produkt Name*@
-                                <td valign="top" style="font-size:12px; text-align:right">@orderline.Quantity </td> @*Produkt Menge*@
-                                <td valign="top" style="font-size:12px; text-align:right">@orderline.Product.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
-                                <td valign="top" style="font-size:12px; text-align:right">@(orderline.Quantity * orderline.Product.UnitPriceNetto)</td> @*Produkt Gesamt Preis Netto*@
+                                <td valign="bottom" width="50%" height="50">
+                                    <div align="left"><img src="~/Images/watchShopLogo.jpg" style="width:50%; height:50%"></div><br>
+                                </td>
+
+                                <td width="50%">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>&nbsp Empfänger: <br><br>
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td valign="top" width="35%" style="font-size:12px;">
+                                    <strong> &nbsp @Model.Salutation @Model.FirstName @Model.LastName</strong><br>
+                                    &nbsp @Model.Street <br>&nbsp @Model.City<br>&nbsp @Model.ZipCode<br>
+
+                                </td>
+                                <td valign="top" width="35%">
+                                </td>
+                                <td valign="top" width="30%" style="font-size:12px;">
+                                    Rechnungsdatum: @Model.OrderedOn.ToShortDateString()<br>
+                                    Fälligkeitsdatum: @Model.PaidOn.ToShortDateString()<br>
+                                    Lieferdatum: @Model.PaidOn.AddDays(7).ToShortDateString()
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" height="100" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div align="center" style="font-size: 14px;font-weight: bold;">Rechnung Nr.: #0000 @Model.OrderId </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="2" border="1" bordercolor="#CCCCCC">
+                        <tbody>
+                            <tr>
+
+                                <td width="35%" bordercolor="#ccc" bgcolor="azure" style="font-size:12px;">
+                                    <strong>
+                                        Beschreibung
+                                    </strong>
+                                </td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Menge(Stück)</strong></td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Unitpreis in € (netto) </strong></td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Gesamtpreis in € (netto)</strong></td>
 
                             </tr>
+                            <tr style="display:none;">
+                                <td colspan="*"></td>
+                            </tr>
 
-                        }
+                            @foreach (var orderline in Model.OrderLines)
+                            {
 
-@*                        <tr>
+                                <tr>
+                                    <td valign="top" style="font-size:12px;">@orderline.Product.Name</td> @*Produkt Name*@
+                                    <td valign="top" style="font-size:12px; text-align:right">@orderline.Quantity </td> @*Produkt Menge*@
+                                    <td valign="top" style="font-size:12px; text-align:right">@orderline.Product.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
+                                    <td valign="top" style="font-size:12px; text-align:right">@(orderline.Quantity * orderline.Product.UnitPriceNetto)</td> @*Produkt Gesamt Preis Netto*@
 
-                            <td valign="top" style="font-size:12px;">&nbsp;</td>
-                            <td valign="top" style="font-size:12px;">&nbsp;</td>
-                            <td valign="top" style="font-size:12px;">&nbsp;</td>
-                            <td valign="top" style="font-size:12px;">&nbsp;</td>
+                                </tr>
 
-                        </tr>*@
+                            }
 
-                    </tbody>
-                </table>
-                <table width="100%" cellspacing="0" cellpadding="2" border="0">
-                    <tbody>
-                        <tr>
-                            <td style="font-size:12px;width:50%;"><strong> </strong></td>
-                            <td>
-                                <table width="100%" cellspacing="0" cellpadding="2" border="0">
-                                    <tbody>
-                                        <tr>
-                                            <td align="right" style="font-size:12px;">Gesamtpreis Netto: </td>
-                                            <td align="right" style="font-size:12px;">€ @Model.TotalPriceNetto</td>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="right" style="font-size:12px;">USt.: @(Model.CategoriesTaxRate * 100)%</td>
-                                            <td align="right" style="font-size:12px;">€ @(Model.TotalPriceNetto * 0.2)</td>
-                                        </tr>
-                                        <tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="font-size:12px;width:50%;"><strong> </strong></td>
+                                <td>
+                                    <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                        <tbody>
+                                            <tr>
+                                                <td align="right" style="font-size:12px;">Gesamtpreis Netto: </td>
+                                                <td align="right" style="font-size:12px;">€ @Model.TotalPriceNetto</td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" style="font-size:12px;">USt.: @(Model.CategoriesTaxRate * 100)%</td>
+                                                <td align="right" style="font-size:12px;">€ @((Model.TotalPriceNetto * Model.CategoriesTaxRate).ToString("N2"))</td>
+                                            </tr>
+                                            <tr>
 
-                                            <td align="right" style="font-size:12px;"><b>Gesamtpreis Brutto: </b></td>
-                                            <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto</b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                                <td align="right" style="font-size:12px;"><b>Gesamtpreis Brutto: </b></td>
+                                                <td align="right" style="font-size:12px;"><b>€ @Model.TotalPriceBrutto.ToString("N2")</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <table width="100%" height="50">
-                    <tbody>
-                        <tr>
-                            <td style="font-size:12px;text-align:justify;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table width="100%" cellspacing="0" cellpadding="2">
-                    <tbody>
-                        <tr>
-                            <td width="33%" style="border-top:double medium #CCCCCC;font-size:12px;" valign="top">
-                                <b>WatchWebShop GmbH.</b><br>
-                                StNr.: 12-1234567<br>
-                                UID-Nr.: ATU12345678<br>
-                            </td>
-                            <td width="33%" style="border-top:double medium #CCCCCC; font-size:12px;" align="center" valign="top">
-                                Hauptstraße 1, 1020 Wien Österreich <br>
+                    <table width="100%" height="50">
+                        <tbody>
+                            <tr>
+                                <td style="font-size:12px;text-align:justify;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="2">
+                        <tbody>
+                            <tr>
+                                <td width="33%" style="border-top:double medium #CCCCCC;font-size:12px;" valign="top">
+                                    <b>WatchWebShop GmbH.</b><br>
+                                    StNr.: 12-1234567<br>
+                                    UID-Nr.: ATU12345678<br>
+                                </td>
+                                <td width="33%" style="border-top:double medium #CCCCCC; font-size:12px;" align="center" valign="top">
+                                    Hauptstraße 1, 1020 Wien Österreich <br>
 
-                            </td>
+                                </td>
 
-                            <td valign="top" width="34%" style="border-top:double medium #CCCCCC;font-size:12px;" align="right">
-                                Bankverbindung: Sparkasse<br> IBAN: AT37 206 0400 0012 3456 <br>SWIFT/BIC: SPFKAT2X <br>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                                <td valign="top" width="34%" style="border-top:double medium #CCCCCC;font-size:12px;" align="right">
+                                    Bankverbindung: Sparkasse<br> IBAN: AT37 206 0400 0012 3456 <br>SWIFT/BIC: SPFKAT2X <br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-@*</body>
-</html>*@
+<br />
 
+@*<center><a class="btn btn-primary text-white" onclick="window.print(); return false">Save or Print the Invoice</a></center>*@
+
+<center><a class="btn btn-primary text-white" href="javascript:void(0);" onclick="printPageArea('printableArea')">Save or Print the Invoice</a></center>
+
+@section Scripts{
+    <script>
+
+        function printPageArea(areaID) {
+            var printContent = document.getElementById(areaID).innerHTML;
+            var originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+
+    </script>
+}
