@@ -38,7 +38,9 @@ namespace WatchWebShop.Data
                         new Manufacturer { Name = "Certina", LogoPath = "https://www.designtagebuch.de/wp-content/uploads/mediathek//2013/05/certina-logo-700x513.jpg" },
                         new Manufacturer { Name = "Citizen", LogoPath = "https://1000logos.net/wp-content/uploads/2020/09/Logo-Citizen.jpg" },
                         new Manufacturer { Name = "Seiko", LogoPath = "https://www.zeitenblick.at/wp-content/uploads/2019/06/Seiko-logo-1600x900-tiny-1024x576.png" },
-                        new Manufacturer { Name = "Tissot", LogoPath = "https://i.pinimg.com/originals/b0/23/46/b02346ae70c528b816475eb088a81906.jpg" }
+                        new Manufacturer { Name = "Tissot", LogoPath = "https://i.pinimg.com/originals/b0/23/46/b02346ae70c528b816475eb088a81906.jpg" },
+                        new Manufacturer { Name = "Grand Seiko", LogoPath = "https://www.seikowatches.com/nl-nl/-/media/Images/GlobalEn/Seiko/Home/news/20180322-1/gs_w2000px-h1125px.jpg" },
+                        new Manufacturer { Name = "Rolex", LogoPath = "https://www.brandslex.de/img/logos/xl/r/logo-rolex-01.png" }
                     );
                     context.SaveChanges();
                 }
@@ -76,6 +78,16 @@ namespace WatchWebShop.Data
                             ImagePath = "https://citizenwatch.widen.net/content/qigtdjwdkh/jpeg/Rebel+Pilot.jpeg?u=41zuoe&width=500&height=625&quality=80&crop=false&keep=c&color=F9F8F6",
                             CategoryId = 3,
                             ManufacturerId = 3
+                        },
+
+                        new Product()
+                        {
+                            Name = "Grand Seiko Sport GMT - SBGJ237",
+                            Description = "Im Inneren schlägt mit dem Schnellschwingerkaliber 9S86 ein hochwertige Uhrwerk mit einer Ganggenauigkeit von +5 bis -3 Sekunden pro Tag und einer Gangreserve von bis zu 55 Stunden. Um immer und übera",
+                            UnitPriceNetto = 6000.00,
+                            ImagePath = "https://www.grand-seiko.com/de-de/-/media/Images/GlobalEn/GrandSeiko/Home/collections/sport/s5/s5.png?mh=300&mw=300&hash=76D392FAE068864A0F0ED8AF8DAE1B0A",
+                            CategoryId = 1,
+                            ManufacturerId = 6
                         }
                     });
                     context.SaveChanges();
