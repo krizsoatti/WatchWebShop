@@ -62,7 +62,7 @@ namespace WatchWebShop.Data.Services
                     ProductId = item.Product.Id,
                     Quantity = item.Quantity,
                     UnitPriceNetto = item.Product.UnitPriceNetto,
-                    TaxRate = 0.2
+                    TaxRate = _context.Categories.Where(n => n.Id == item.Product.CategoryId).FirstOrDefault().TaxRate
                 };
 
                 await _context.OrderLines.AddAsync(orderItem);
