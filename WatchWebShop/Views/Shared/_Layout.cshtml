@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - WatchWebShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
@@ -65,7 +66,13 @@
 
     <footer class="border-top footer text-light bg-dark">
         <div class="container">
-            &copy; 2023 - WatchWebShop
+            @*&copy; 2023 - WatchWebShop*@
+
+                <a href="https://www.facebook.com" class="fa fa-facebook"></a>
+                <a href="https://www.youtube.com" class="fa fa-youtube"></a>
+                <a href="https://www.twitter.com" class="fa fa-twitter"></a>
+                <a href="https://www.instagram.com" class="fa fa-instagram"></a>
+
             <a class="btn btn-outline-primary my-2 my-sum-sm-0 float-right" asp-controller="Products" asp-action="Agb">AGB</a>
         </div>
     </footer>
@@ -83,6 +90,48 @@
 
     #valami{
         background-color: lightgray;
+    }
+
+    .fa {
+        padding: 7px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        margin: 15px 3px;
+        border-radius: 50%;
+        /*width: 7.5px;
+        height: 7.5px;*/
+        font-size: 17px;
+        /*line-height: 7.5px !important;*/
+    }
+
+    .fa {
+        background: #F0F0F0;
+        color: #282828;
+    }
+
+    .fa-facebook:hover {
+        background: #3B5998;
+        color: white;
+        /*line-height: inherit;*/
+    }
+
+    .fa-youtube:hover {
+        background: #bb0000;
+        color: white;
+        /*line-height: inherit;*/
+    }
+
+    .fa-twitter:hover {
+        background: #125688;
+        color: white;
+        /*line-height: inherit;*/
+    }
+
+    .fa-instagram:hover {
+        background: #125688;
+        color: white;
+        /*line-height: inherit;*/
     }
 
 </style>
