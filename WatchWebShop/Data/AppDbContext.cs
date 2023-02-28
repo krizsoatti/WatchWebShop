@@ -27,14 +27,7 @@ namespace WatchWebShop.Data
                 .WithMany(o => o.OrderLines)
                 .HasForeignKey(ol => ol.OrderId);
 
-            //modelBuilder.Entity<OrderLine>()
-            //    .HasOne(ol => ol.Product)
-            //    .WithMany(p => p.OrderLines)
-            //    .HasForeignKey(ol => ol.ProductId);
-
             base.OnModelCreating(modelBuilder);
-
-
         }
         
         public DbSet<Product> Products { get; set; }

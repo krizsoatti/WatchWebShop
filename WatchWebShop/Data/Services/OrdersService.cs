@@ -53,7 +53,6 @@ namespace WatchWebShop.Data.Services
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
-            //rajonni miert nem veszi at a taxratet
             foreach (var item in items)
             {
                 var orderItem = new OrderLine()
@@ -72,7 +71,6 @@ namespace WatchWebShop.Data.Services
 
         public async Task<Order> GetLastOrderAsync(string userId)
         {
-            //var lastOrder = await _context.Orders.OrderByDescending(n => n.Id).LastOrDefaultAsync();
             var lastOrder = await _context.Orders.Where(n => n.CustomerId == userId).OrderByDescending(n => n.Id).FirstOrDefaultAsync();
             return lastOrder;
         }

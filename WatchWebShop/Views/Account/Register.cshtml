@@ -26,12 +26,6 @@
                     <br />
 
                     @Html.DropDownListFor(m => m.Salutation, new SelectList(Enum.GetValues(typeof(Salutation)).Cast<Salutation>()), "Salutation", new { @class = "form-control" })
-                    
-                        @*<div class="form-group">
-                        <label asp-for="Salutation" class="control-label"></label>
-                        <input asp-for="Salutation" class="form-control" />
-                        <span asp-validation-for="Salutation" class="text-danger"></span>
-                    </div>*@
 
                     <br />
 
