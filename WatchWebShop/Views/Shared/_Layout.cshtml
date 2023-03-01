@@ -14,12 +14,9 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container-fluid">
-                @*<a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">WatchWebShop</a>*@
+                
                 <img src="~/Images/watchShopLogo.jpg" width="150px" height="auto" title="WebshopLogo">
-                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>*@
+                
                 <text>   </text>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
@@ -132,6 +129,15 @@
         background: #125688;
         color: white;
         /*line-height: inherit;*/
+    }
+
+    .navbar{
+        animation: mymove 1.5s;
+    }
+
+    @@keyframes mymove {
+    from {top: -50px;}
+    to {top: 0px;}
     }
 
 </style>
