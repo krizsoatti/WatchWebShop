@@ -8,18 +8,22 @@
 }
 
 <br />
+<br />
 <div id="printableArea">
-    <table align="center" border="3" cellpadding="0" cellspacing="0" style="height:842px; width:595px;font-size:12px; background-color:azure">
+    <table align="center" border="1" cellpadding="0" cellspacing="0" style="height:850px; width:600px;font-size:12px; background-color:azure">
         <tbody>
             <tr>
                 <td valign="top">
                     <table width="100%" cellspacing="0" cellpadding="0">
                         <tbody>
                             <tr>
+                                <td width="10px">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="10px">&nbsp;</td>
                                 <td valign="bottom" width="50%" height="50">
                                     <div align="left"><img src="~/Images/watchShopLogo.jpg" style="width:50%; height:50%"></div><br>
                                 </td>
-
                                 <td width="50%">&nbsp;</td>
                             </tr>
                         </tbody>
@@ -35,9 +39,9 @@
                                 <td valign="top" width="35%">
                                 </td>
                                 <td valign="top" width="30%" style="font-size:12px;">
-                                    Rechnungsdatum: @Model.OrderedOn.ToShortDateString()<br>
-                                    Fälligkeitsdatum: @Model.PaidOn.ToShortDateString()<br>
-                                    Lieferdatum: @Model.PaidOn.AddDays(7).ToShortDateString()
+                                    &nbsp Rechnungsdatum: @Model.OrderedOn.ToShortDateString()<br>
+                                    &nbsp Fälligkeitsdatum: @Model.PaidOn.ToShortDateString()<br>
+                                    &nbsp Lieferdatum: @Model.PaidOn.AddDays(7).ToShortDateString()
                                 </td>
                             </tr>
                         </tbody>
@@ -60,9 +64,9 @@
                                         Beschreibung
                                     </strong>
                                 </td>
-                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Menge(Stück)</strong></td>
-                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Unitpreis in € (netto) </strong></td>
-                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px;"><strong>Gesamtpreis in € (netto)</strong></td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px; text-align:center"><strong>Menge(Stück)</strong></td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px; text-align:center"><strong>Unitpreis in € (netto) </strong></td>
+                                <td bordercolor="#ccc" bgcolor="azure" style="font-size:12px; text-align:center"><strong>&nbsp Gesamtpreis in € (netto)</strong></td>
 
                             </tr>
                             <tr style="display:none;">
@@ -71,19 +75,16 @@
 
                             @foreach (var orderline in Model.OrderLines)
                             {
-
                                 <tr>
                                     <td valign="top" style="font-size:12px;">@orderline.Product.Name</td> @*Produkt Name*@
-                                    <td valign="top" style="font-size:12px; text-align:right">@orderline.Quantity </td> @*Produkt Menge*@
-                                    <td valign="top" style="font-size:12px; text-align:right">@orderline.Product.UnitPriceNetto </td> @*Produkt Unit Preis Netto*@
-                                    <td valign="top" style="font-size:12px; text-align:right">@(orderline.Quantity * orderline.Product.UnitPriceNetto)</td> @*Produkt Gesamt Preis Netto*@
-
+                                    <td valign="top" style="font-size:12px; text-align:center">@orderline.Quantity</td> @*Produkt Menge*@
+                                    <td valign="top" style="font-size:12px; text-align:center">@orderline.Product.UnitPriceNetto</td> @*Produkt Unit Preis Netto*@
+                                    <td valign="top" style="font-size:12px; text-align:right">@(orderline.Quantity * orderline.Product.UnitPriceNetto)&nbsp&nbsp</td> @*Produkt Gesamt Preis Netto*@
                                 </tr>
-
                             }
-
                         </tbody>
                     </table>
+
                     <table width="100%" cellspacing="0" cellpadding="2" border="0">
                         <tbody>
                             <tr>
@@ -93,7 +94,7 @@
                                         <tbody>
                                             <tr>
                                                 <td align="right" style="font-size:12px;">Gesamtpreis Netto: </td>
-                                                <td align="right" style="font-size:12px;">€ @Model.TotalPriceNetto</td>
+                                                <td align="right" style="font-size:12px;">€ @Model.TotalPriceNetto.ToString("N2")</td>
                                                 <td>
                                                 </td>
                                             </tr>
@@ -113,20 +114,21 @@
                         </tbody>
                     </table>
 
-                    <table width="100%" height="50">
+                    <table width="100%" height="30%">
                         <tbody>
                             <tr>
                                 <td style="font-size:12px;text-align:justify;"></td>
                             </tr>
                         </tbody>
                     </table>
+
                     <table width="100%" cellspacing="0" cellpadding="2">
                         <tbody>
                             <tr>
                                 <td width="33%" style="border-top:double medium #CCCCCC;font-size:12px;" valign="top">
-                                    <b>WatchWebShop GmbH.</b><br>
-                                    StNr.: 12-1234567<br>
-                                    UID-Nr.: ATU12345678<br>
+                                    <b>&nbsp WatchWebShop GmbH.</b><br>
+                                    &nbsp StNr.: 12-1234567<br>
+                                    &nbsp UID-Nr.: ATU12345678<br>
                                 </td>
                                 <td width="33%" style="border-top:double medium #CCCCCC; font-size:12px;" align="center" valign="top">
                                     Hauptstraße 1, 1020 Wien Österreich <br>
@@ -134,7 +136,7 @@
                                 </td>
 
                                 <td valign="top" width="34%" style="border-top:double medium #CCCCCC;font-size:12px;" align="right">
-                                    Bankverbindung: Sparkasse<br> IBAN: AT37 206 0400 0012 3456 <br>SWIFT/BIC: SPFKAT2X <br>
+                                    Bankverbindung: Sparkasse &nbsp<br> IBAN: AT37 206 0400 0012 3456 &nbsp<br>SWIFT/BIC: SPFKAT2X &nbsp<br>
                                 </td>
                             </tr>
                         </tbody>
@@ -156,6 +158,10 @@
             var printContent = document.getElementById(areaID).innerHTML;
             var originalContent = document.body.innerHTML;
             document.body.innerHTML = printContent;
+            var table = document.getElementsByTagName("table")[0];
+            table.style.width = "80%";
+            table.style.fontSize = "10pt";
+            table.style.padding = "2px";
             window.print();
             document.body.innerHTML = originalContent;
         }
