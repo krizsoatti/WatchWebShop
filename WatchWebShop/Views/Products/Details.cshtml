@@ -61,6 +61,6 @@
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <div style="position:fixed; right:20px; bottom: 125px;" class="text-white">
-        <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+        <a asp-asp-controller="Products" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
     </div>
 }
