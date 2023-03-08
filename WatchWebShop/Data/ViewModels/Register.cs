@@ -41,7 +41,7 @@ namespace WatchWebShop.Data.ViewModels
         [Required(ErrorMessage = "Phone number is required")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Password has to contains a combination of uppercase and lowercase letter, number and special character")]
+        [Required(ErrorMessage = "Min 10 char! Password has to contains a combination of uppercase and lowercase letter, number and special character")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
