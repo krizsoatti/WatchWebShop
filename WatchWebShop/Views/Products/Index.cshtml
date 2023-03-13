@@ -19,6 +19,20 @@
 
 <hr />
 
+@*sort by dropdown list with post*@
+<div class="">
+    <form method="post">
+        <label for="sortBy"></label>
+        <select name="sortBy" id="sortBy">
+            <option value="nameDesc">Name ↓</option>
+            <option value="">Name ↑</option>
+            <option value="priceDesc">Price ↓</option>
+            <option value="price">Price ↑</option>
+        </select>
+        <input type="submit" value="Go" />
+    </form>
+</div>
+
 <br />
 
 <div class="row">
@@ -68,7 +82,7 @@
 @await Html.PartialAsync("_CreateItem", "Products")
 
 <style>
-    .card-text{
+    .card-text {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;

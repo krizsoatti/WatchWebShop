@@ -24,9 +24,26 @@ namespace WatchWebShop.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortBy)
         {
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
+
+            switch (sortBy)
+            {
+                case "nameDesc":
+                    allProducts = allProducts.OrderByDescending(n => n.Name);
+                    break;
+                case "price":
+                    allProducts = allProducts.OrderBy(p => p.UnitPriceNetto);
+                    break;
+                case "priceDesc":
+                    allProducts = allProducts.OrderByDescending(p => p.UnitPriceNetto);
+                    break;
+                default:
+                    allProducts = allProducts.OrderBy(n => n.Name);
+                    break;
+            }
+
             return View(allProducts);
         }
 
@@ -91,7 +108,7 @@ namespace WatchWebShop.Controllers
                 CategoryId = productDetail.CategoryId,
                 ManufacturerId = productDetail.ManufacturerId
             };
-            
+
             var productDropdownsData = await _service.GetNewProductDropdownValues();
 
             ViewBag.Manufacturers = new SelectList(productDropdownsData.Manufacturers, "Id", "Name");
@@ -121,7 +138,7 @@ namespace WatchWebShop.Controllers
             await _service.UpdateProductAsync(product);
             return RedirectToAction(nameof(Index));
         }
-        
+
         //GET: Products/Delete/1
         public async Task<IActionResult> Delete(int id)
         {
