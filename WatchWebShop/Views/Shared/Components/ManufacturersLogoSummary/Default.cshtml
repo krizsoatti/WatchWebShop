@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Manufacturer>
 
 <div class="container" style="justify-content:center">
-    <a class="nav-link text-dark" asp-controller="Manufacturers" asp-action="Index">
+    @*<a class="nav-link text-dark" asp-controller="Manufacturers" asp-action="Index">*@
         <center>
             @foreach (var item in Model)
             {
                 <img class="rounded-circle" src="@item.LogoPath" alt="@item.Name" style="width:100px; padding-right: 10px;">
             }
         </center>
-    </a>
+    @*</a>*@
 </div>
