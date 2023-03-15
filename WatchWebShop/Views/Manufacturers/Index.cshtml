@@ -22,16 +22,16 @@
                 {
                     <tr>
                         <td class="align-middle">
-                            <img class="rounded-circle" src="@item.LogoPath" alt="@item.Name" style="max-width: 150px" />
+                            <img class="rounded-3" src="@item.LogoPath" alt="@item.Name" style="max-width: 150px" />
                         </td>
                         <td class="align-middle">
                             <b>@Html.DisplayFor(modelItem => item.Name)</b>
                         </td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <td class="float-right">
-                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
-                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
+                            <td class="float-right btn-group-vertical">
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> &nbsp;
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> &nbsp
                                 <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
                             </td>
                         }
