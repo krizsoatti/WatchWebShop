@@ -88,5 +88,11 @@ namespace WatchWebShop.Data.Services
                            select p.Product;
             return products.ToList();
         }
+
+        public async Task<List<OrderLine>> GetAllOrderLines()
+        {
+            var allOrderLines = await _context.OrderLines.ToListAsync();
+            return allOrderLines;
+        }
     }
 }

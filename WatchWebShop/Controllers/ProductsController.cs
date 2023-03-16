@@ -17,16 +17,21 @@ namespace WatchWebShop.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductsService _service;
+        private readonly IOrdersService _ordersService;
 
-        public ProductsController(IProductsService service)
+        public ProductsController(IProductsService service, IOrdersService ordersService)
         {
             _service = service;
+            _ordersService = ordersService;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortBy)
         {
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
+
+            //show the most orderes product
+            var mostOrdered = await _ordersService.GetAllOrderLines();
 
             switch (sortBy)
             {
@@ -38,6 +43,9 @@ namespace WatchWebShop.Controllers
                     break;
                 case "priceDesc":
                     allProducts = allProducts.OrderByDescending(p => p.UnitPriceNetto);
+                    break;
+                case "mostOrdered": //sum of orderlines quantity for each product
+                    allProducts = allProducts.OrderByDescending(m => mostOrdered.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
                     break;
                 default:
                     allProducts = allProducts.OrderBy(n => n.Name);

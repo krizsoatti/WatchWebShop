@@ -16,6 +16,8 @@ namespace WatchWebShop.Data.Services
 
         Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole);
 
+        Task<List<OrderLine>> GetAllOrderLines();
+
         Task<Order> GetLastOrderAsync(string userId);
         Task<List<OrderLine>> GetLastOrderLineAsync(int orderId);
         Task<List<Product>> GetLastOrderLineProductsAsync(int orderId);
