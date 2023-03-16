@@ -177,5 +177,11 @@ namespace WatchWebShop.Controllers
         {
             return View("Agb");
         }
+
+        [AllowAnonymous]
+        public IActionResult UnderConstruction()
+        {
+            return View("UnderConstruction");
+        }
     }
 }

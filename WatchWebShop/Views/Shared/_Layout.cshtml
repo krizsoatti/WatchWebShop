@@ -16,14 +16,27 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container-fluid">
 
-                <img src="~/Images/watchShopLogo.jpg" width="150px" height="auto" title="WebshopLogo">
+                <a class="nav-link text-light" asp-controller="Products" asp-action="Index">
+                    <img src="~/Images/watchShopLogo.jpg" width="150px" height="auto" title="WebshopLogo">
+                </a>
 
-                <text>   </text>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="navbar-nav flex-grow">
-                            <a class="nav-link text-light" asp-controller="Products" asp-action="Index"><i class="bi bi-smartwatch"></i> Our Products</a>
-                        </li>
+                        @*<li class="navbar-nav flex-grow">
+                        <a class="nav-link text-light" asp-controller="Products" asp-action="Index"><i class="bi bi-smartwatch"></i> Our Products</a>
+                        </li>*@
+
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <li class="justify-content-center" style="margin:auto">
+                                <center>
+                                    <div class="text-50 text-light">
+                                        <h3>Welcome in my first ASP.NET CORE 5 MVC E-Commerce testproject</h3>
+                                    </div>
+                                </center>
+                            </li>
+                        }
 
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
@@ -72,10 +85,10 @@
             </div>
 
             <div>
-                <a href="" class="" style="color:lightslategrey">About Us</a> |
-                <a href="" class="" style="color:lightslategrey">Contact</a> |
-                <a href="" class="" style="color:lightslategrey">Support</a> |
-                <a href="" class="" style="color:lightslategrey">FAQ</a>
+                <a asp-controller="Products" asp-action="UnderConstruction" style="color:lightslategrey">About Us</a> |
+                <a asp-controller="Products" asp-action="UnderConstruction" style="color:lightslategrey">Contact</a> |
+                <a asp-controller="Products" asp-action="UnderConstruction" style="color:lightslategrey">Support</a> |
+                <a asp-controller="Products" asp-action="UnderConstruction" style="color:lightslategrey">FAQ</a>
             </div>
 
             <div>
