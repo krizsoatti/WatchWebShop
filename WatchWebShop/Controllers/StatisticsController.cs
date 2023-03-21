@@ -38,5 +38,26 @@ namespace WatchWebShop.Controllers
 
 			return View();
         }
+
+		public async Task<IActionResult> IncomeProProduct()
+		{
+			var orderLines = await _ordersService.GetAllOrderLines();
+			var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
+
+			//add product name and sum of product's price
+
+			//das ist momentan noch falsch
+			var sumProProduct = allProducts.OrderByDescending(m => orderLines.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity * q.UnitPriceNetto));
+			
+			List<Charts> dataPoints = new List<Charts>();
+			foreach (var item in sumProProduct)
+			{
+				dataPoints.Add(new Charts(item.Name, orderLines.Where(p => p.ProductId == item.Id).Sum(q => q.Quantity * q.UnitPriceNetto)));
+			}
+
+			ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+			return View();
+		}
     }
 }
