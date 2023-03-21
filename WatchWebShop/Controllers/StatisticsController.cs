@@ -2,23 +2,37 @@
 using WatchWebShop.Models;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using WatchWebShop.Data.Services;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace WatchWebShop.Controllers
 {
     public class StatisticsController : Controller
     {
-        public IActionResult Index()
-        {
-            List<Charts> dataPoints = new List<Charts>();
+		private readonly IProductsService _service;
+		private readonly IOrdersService _ordersService;
 
-			dataPoints.Add(new Charts("USA", 121));
-			dataPoints.Add(new Charts("Great Britain", 67));
-			dataPoints.Add(new Charts("China", 70));
-			dataPoints.Add(new Charts("Russia", 56));
-			dataPoints.Add(new Charts("Germany", 42));
-			dataPoints.Add(new Charts("Japan", 41));
-			dataPoints.Add(new Charts("France", 42));
-			dataPoints.Add(new Charts("South Korea", 21));
+        public StatisticsController(IProductsService service, IOrdersService ordersService)
+        {
+			_service = service;
+			_ordersService = ordersService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+			var mostOrdered = await _ordersService.GetAllOrderLines();
+			var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
+
+			var sumProProduct = allProducts.OrderByDescending(m => mostOrdered.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
+
+			List<Charts> dataPoints = new List<Charts>();
+
+			//add product name and sum of quantity to dataPoints
+			foreach (var item in sumProProduct)
+			{
+				dataPoints.Add(new Charts(item.Name, mostOrdered.Where(p => p.ProductId == item.Id).Sum(q => q.Quantity)));
+			}
 
 			ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 

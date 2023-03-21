@@ -30,7 +30,7 @@ namespace WatchWebShop.Controllers
         {
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
 
-            //show the most orderes product
+            //show the most ordered product
             var mostOrdered = await _ordersService.GetAllOrderLines();
 
             switch (sortBy)
