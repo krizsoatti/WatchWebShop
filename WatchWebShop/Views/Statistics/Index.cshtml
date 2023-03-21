@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Statistics";
+}
+
+<br />
+<div class="text-50 text-primary">
+    <h4 style="text-align:center">Statistics</h4>
+</div>
+
+<br />
+
+<center>
+	<div id="chartContainer" style="height: auto; width: 70%;"></div>
+</center>
+
+<script>
+	window.onload = function () {
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled: true,
+			theme: "light2", // "light1", "dark1", "dark2"
+			exportEnabled: true,
+			title: {
+				text: "Topseller"
+			},
+			data: [{
+				type: "column",
+				dataPoints: @Html.Raw(ViewBag.DataPoints)
+		}]
+		});
+		chart.render();
+	}
+</script>
