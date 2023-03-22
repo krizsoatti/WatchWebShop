@@ -15,6 +15,7 @@ namespace WatchWebShop.Data.Services
             );
 
         Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string customerId, string userRole);
+        Task<List<Order>> GetAllOrders();
 
         Task<List<OrderLine>> GetAllOrderLines();
 

@@ -94,5 +94,11 @@ namespace WatchWebShop.Data.Services
             var allOrderLines = await _context.OrderLines.ToListAsync();
             return allOrderLines;
         }
+
+        public Task<List<Order>> GetAllOrders()
+        {
+           var allOrders = _context.Orders.Include(n => n.OrderLines).ThenInclude(n => n.Product).ToListAsync();
+           return allOrders;
+        }
     }
 }

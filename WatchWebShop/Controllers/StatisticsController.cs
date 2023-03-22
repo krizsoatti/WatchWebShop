@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using WatchWebShop.Data.Services;
 using System.Threading.Tasks;
 using System.Linq;
+using WatchWebShop.Data;
 
 namespace WatchWebShop.Controllers
 {
@@ -12,26 +13,28 @@ namespace WatchWebShop.Controllers
     {
 		private readonly IProductsService _service;
 		private readonly IOrdersService _ordersService;
+		private readonly AppDbContext _context;
 
-        public StatisticsController(IProductsService service, IOrdersService ordersService)
+        public StatisticsController(IProductsService service, IOrdersService ordersService, AppDbContext context)
         {
 			_service = service;
 			_ordersService = ordersService;
+			_context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-			var mostOrdered = await _ordersService.GetAllOrderLines();
+			var allOrderLines = await _ordersService.GetAllOrderLines();
 			var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
 
-			var sumProProduct = allProducts.OrderByDescending(m => mostOrdered.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
+			var sumProProduct = allProducts.OrderByDescending(m => allOrderLines.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
 
 			List<Charts> dataPoints = new List<Charts>();
 
 			//add product name and sum of quantity to dataPoints
 			foreach (var item in sumProProduct)
 			{
-				dataPoints.Add(new Charts(item.Name, mostOrdered.Where(p => p.ProductId == item.Id).Sum(q => q.Quantity)));
+				dataPoints.Add(new Charts(item.Name, allOrderLines.Where(p => p.ProductId == item.Id).Sum(q => q.Quantity)));
 			}
 
 			ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
@@ -39,25 +42,24 @@ namespace WatchWebShop.Controllers
 			return View();
         }
 
-		public async Task<IActionResult> IncomeProProduct()
+		public async Task<IActionResult> GenresChart()
 		{
-			var orderLines = await _ordersService.GetAllOrderLines();
+			var allOrderLines = await _ordersService.GetAllOrderLines();
 			var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
+			//var allOrders = await _ordersService.GetAllOrders();
 
-			//add product name and sum of product's price
+			var sumCategoryOrders = allProducts.GroupBy(n => n.Category.Name).Select(n => new { CategoryName = n.Key, Sum = n.Sum(m => m.UnitPriceNetto) });
 
-			//das ist momentan noch falsch
-			var sumProProduct = allProducts.OrderByDescending(m => orderLines.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity * q.UnitPriceNetto));
-			
-			List<Charts> dataPoints = new List<Charts>();
-			foreach (var item in sumProProduct)
-			{
-				dataPoints.Add(new Charts(item.Name, orderLines.Where(p => p.ProductId == item.Id).Sum(q => q.Quantity * q.UnitPriceNetto)));
-			}
+            List<Charts> dataPoints = new List<Charts>();
 
-			ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            foreach (var item in sumCategoryOrders)
+            {
+				dataPoints.Add(new Charts(item.CategoryName, item.Sum));
+            }
 
-			return View();
-		}
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            return View();
+        }
     }
 }

@@ -15,7 +15,7 @@
             exportEnabled: true,
             animationEnabled: true,
             title: {
-                text: "Income Share pro Product"
+                text: "Genres"
             },
             subtitles: [{
                 text: "Q1, 2023"
@@ -23,10 +23,10 @@
             data: [{
                 type: "pie",
                 startAngle: 180,
-                toolTipContent: "<b>{label}</b>: {y}%",
+                toolTipContent: "<b>{label}</b>: {y}€",
                 showInLegend: "true",
                 legendText: "{label}",
-                indexLabel: "{label} - {y}%",
+                indexLabel: "{label} - {y}€",
                 dataPoints: @Html.Raw(ViewBag.DataPoints)
                     }]
         });
