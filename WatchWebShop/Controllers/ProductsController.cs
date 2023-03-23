@@ -31,7 +31,7 @@ namespace WatchWebShop.Controllers
             var allProducts = await _service.GetAllAsync(n => n.Manufacturer, c => c.Category);
 
             //show the most ordered product
-            var mostOrdered = await _ordersService.GetAllOrderLines();
+            var allOrderLines = await _ordersService.GetAllOrderLines();
 
             switch (sortBy)
             {
@@ -45,7 +45,7 @@ namespace WatchWebShop.Controllers
                     allProducts = allProducts.OrderByDescending(p => p.UnitPriceNetto);
                     break;
                 case "mostOrdered": //sum of orderlines quantity for each product
-                    allProducts = allProducts.OrderByDescending(m => mostOrdered.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
+                    allProducts = allProducts.OrderByDescending(m => allOrderLines.Where(p => p.ProductId == m.Id).Sum(q => q.Quantity));
                     break;
                 default:
                     allProducts = allProducts.OrderBy(n => n.Name);
