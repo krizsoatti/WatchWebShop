@@ -6,9 +6,12 @@ using WatchWebShop.Data.Services;
 using System.Threading.Tasks;
 using System.Linq;
 using WatchWebShop.Data;
+using Microsoft.AspNetCore.Authorization;
+using WatchWebShop.Data.Static;
 
 namespace WatchWebShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class StatisticsController : Controller
     {
 		private readonly IProductsService _service;
