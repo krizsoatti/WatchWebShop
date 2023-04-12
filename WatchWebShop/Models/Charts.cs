@@ -19,6 +19,6 @@ namespace WatchWebShop.Models
 
 		//Explicitly setting the name to be used while serializing to JSON.
 		[DataMember(Name = "y")]
-		public Nullable<double> Y = null;
+		public double? Y = null;
 	}
 }

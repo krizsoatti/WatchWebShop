@@ -29,7 +29,7 @@ namespace WatchWebShop.Data
 
             base.OnModelCreating(modelBuilder);
         }
-        
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }

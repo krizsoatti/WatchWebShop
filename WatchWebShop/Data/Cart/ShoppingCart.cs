@@ -12,7 +12,7 @@ namespace WatchWebShop.Data.Cart
 {
     public class ShoppingCart
     {
-        private AppDbContext _context { get; set; }
+        private AppDbContext _context { get; }
 
         public string ShoppingCartId { get; set; }
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
@@ -75,11 +75,11 @@ namespace WatchWebShop.Data.Cart
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ??
-                   (ShoppingCartItems = _context.ShoppingCartItems
+            return ShoppingCartItems ??=
+_context.ShoppingCartItems
                        .Where(c => c.ShoppingCartId == ShoppingCartId)
                        .Include(s => s.Product)
-                       .ToList());
+                       .ToList();
         }
 
         public double GetShoppingCartTotal()

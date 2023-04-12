@@ -83,7 +83,6 @@ namespace WatchWebShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         // GET: Products/Details/1
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)

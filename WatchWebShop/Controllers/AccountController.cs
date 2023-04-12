@@ -58,7 +58,6 @@ namespace WatchWebShop.Controllers
                 }
                 TempData["Error"] = "Wrong credentials. Please try again!";
                 return View(loginVM);
-
             }
 
             TempData["Error"] = "Wrong credentials. Please try again!";
@@ -101,7 +100,7 @@ namespace WatchWebShop.Controllers
             };
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
-            if (newUserResponse.Succeeded) 
+            if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
             return View("RegisterCompleted");

@@ -50,7 +50,6 @@ namespace WatchWebShop.Data.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
     }
 
     public enum Salutation

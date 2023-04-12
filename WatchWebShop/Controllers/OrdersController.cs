@@ -21,7 +21,6 @@ namespace WatchWebShop.Controllers
         private readonly IOrdersService _ordersService;
         private readonly UserManager<Customer> _userManager;
 
-
         public OrdersController(IProductsService productService, ShoppingCart shoppingCart, IOrdersService ordersService, UserManager<Customer> userManager)
         {
             _productService = productService;
@@ -76,7 +75,6 @@ namespace WatchWebShop.Controllers
                 {
                     _shoppingCart.AddItemToShoppingCart(product);
                 }
-
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
@@ -121,7 +119,7 @@ namespace WatchWebShop.Controllers
 
             var loggedInUser = await _userManager.GetUserAsync(User);
             var loggedInUserId = loggedInUser.Id;
-            
+
             var lastOrder = await _ordersService.GetLastOrderAsync(loggedInUserId);
             var lastOrderId = lastOrder.Id;
 
@@ -146,7 +144,6 @@ namespace WatchWebShop.Controllers
                 TotalPriceBrutto = lastOrder.TotalPriceBrutto,
                 CategoriesTaxRate = lastOrderLines.Select(x => x.TaxRate).FirstOrDefault(),
                 TotalPriceNetto = lastOrderLines.Select(c => c.Product.UnitPriceNetto * c.Quantity).Sum()
-
         };
             return View(invoice);
         }

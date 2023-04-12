@@ -10,7 +10,7 @@ using WatchWebShop.Models;
 
 namespace WatchWebShop.Data
 {
-    public class AppDbInitializer
+    public static class AppDbInitializer
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
@@ -114,9 +114,9 @@ namespace WatchWebShop.Data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<Customer>>();
-                
-                string adminUserEmail = "krizsoattila@gmail.com";
-                
+
+                const string adminUserEmail = "krizsoattila@gmail.com";
+
                 var adminuser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminuser == null)
                 {
@@ -136,7 +136,7 @@ namespace WatchWebShop.Data
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
-                string appUserEmail = "user@watchwebshop.com";
+                const string appUserEmail = "user@watchwebshop.com";
                 var appuser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appuser == null)
                 {

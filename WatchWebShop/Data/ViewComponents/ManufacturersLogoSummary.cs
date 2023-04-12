@@ -9,10 +9,10 @@ namespace WatchWebShop.Data.ViewComponents
 {
     public class ManufacturersLogoSummary : ViewComponent
     {
-        private AppDbContext _context { get; set; }
-        
+        private AppDbContext _context { get; }
+
         public List<Manufacturer> Manufacturers { get; set; }
-        
+
         public ManufacturersLogoSummary(AppDbContext context)
         {
             _context = context;

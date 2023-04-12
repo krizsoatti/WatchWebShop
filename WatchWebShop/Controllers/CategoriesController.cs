@@ -15,7 +15,7 @@ namespace WatchWebShop.Controllers
     public class CategoriesController : Controller
     {
         private readonly ICategoriesService _service;
-        
+
         public CategoriesController(ICategoriesService service)
         {
             _service = service;

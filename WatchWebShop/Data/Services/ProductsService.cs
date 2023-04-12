@@ -64,7 +64,7 @@ namespace WatchWebShop.Data.Services
         public async Task UpdateProductAsync(NewProductVM product)
         {
             var dbProduct = _context.Products.FirstOrDefault(n => n.Id == product.Id);
-            
+
             if (dbProduct != null)
             {
                 dbProduct.Name = product.Name;

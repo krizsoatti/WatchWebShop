@@ -10,7 +10,7 @@ namespace WatchWebShop.Data.Services
     {
         Task<List<Category>> GetAllCategoriesAsync();
         Task<List<Manufacturer>> GetAllManufacturersAsync();
-        
+
         Task<Product> GetProductByIdAsync(int id);
         Task<NewProductDropdownsVM> GetNewProductDropdownValues();
         Task AddNewProductAsync(NewProductVM data);

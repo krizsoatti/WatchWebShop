@@ -7,7 +7,7 @@ namespace WatchWebShop.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
         public int Quantity { get; set; }
         public double UnitPriceNetto { get; set; }
 

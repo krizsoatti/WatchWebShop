@@ -30,9 +30,9 @@ namespace WatchWebShop.Controllers
             var manufacturers = await _manufacturersService.GetAllAsync();
             var categories = await _productsService.GetAllCategoriesAsync();
 
-            var filteredProducts = products.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
-            n.Description.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
-            n.Manufacturer.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) || 
+            var filteredProducts = products.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) ||
+            n.Description.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) ||
+            n.Manufacturer.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) ||
             n.Category.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
             var filteredManufacturers = manufacturers.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
             var filteredCategories = categories.Where(n => n.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
@@ -43,7 +43,7 @@ namespace WatchWebShop.Controllers
                 Manufacturers = filteredManufacturers,
                 Categories = filteredCategories
             };
-            
+
             return View("Index", searchResult);
         }
 

@@ -9,7 +9,6 @@ namespace WatchWebShop.Data.ViewModels
 {
     public class InvoiceVM
     {
-        
         public double CategoriesTaxRate { get; set; }
 
         [ForeignKey("OrderLineId")]
@@ -28,7 +27,6 @@ namespace WatchWebShop.Data.ViewModels
         public string ZipCode { get; set; }
         public string City { get; set; }
 
-
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
         public int OrderId { get; set; }
@@ -46,6 +44,5 @@ namespace WatchWebShop.Data.ViewModels
         public int Quantity { get; set; }
         public double TotalPriceNetto { get; set; }
         public double TaxRate { get; set; }
-
     }
 }
