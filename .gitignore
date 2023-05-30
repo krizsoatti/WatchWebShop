@@ -386,3 +386,4 @@ FodyWeavers.xsd
 /WatchWebShop/Migrations/20230202120639_Identity_Added.cs
 /WatchWebShop/Migrations/20230202121041_WatchShopDB2.Designer.cs
 /WatchWebShop/Migrations/20230202121041_WatchShopDB2.cs
+/WatchWebShop/appsettings.json
