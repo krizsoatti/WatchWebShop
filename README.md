@@ -1,1 +1,1 @@
-# WatchWebShop
+# WatchWebShop - School Project
